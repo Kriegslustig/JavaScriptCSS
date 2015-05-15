@@ -3,6 +3,9 @@
   "devDependencies": {
     "mocha": "latest"
   },
+  "dependencies": {
+    "underscore": "latest"
+  },
   "scripts": {
     "test": "mocha test/"
   }
