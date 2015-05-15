@@ -35,4 +35,16 @@ describe('fileHandler', function () {
       fs.unlink(testFile)
     })
   })
+
+  describe('cssFilePath', function () {
+    it('should replace the file extesion with css', function () {
+      assert.equal('someFile.css', fileHandler.cssFilePath('someFile.jcss'))
+    })
+    it('should add an extension if there isn\'t one', function () {
+      assert.equal('asdf/somefile.css', fileHandler.cssFilePath('asdf/somefile'))
+    })
+    it('should be able to handle dots in filenames', function () {
+      assert.equal('foo.bar.css', fileHandler.cssFilePath('foo.bar.jcss'))
+    })
+  })
 })
