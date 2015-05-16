@@ -49,6 +49,9 @@ describe('parser', function () {
       assert.equal('div{display:block;}', parser.split('div{display:block;}')[0][1])
       assert.equal('', parser.split('div{display:block;}')[1][1])
     })
+    it('should return false if the passed string is empty', function () {
+      assert.equal(false, parser.split(''))
+    })
   })
 
   describe('exec', function () {
