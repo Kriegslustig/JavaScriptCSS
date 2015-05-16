@@ -3,7 +3,18 @@ var assert = require('assert')
 var parser = require('../lib/parser.js')
 
 describe('parser', function () {
-  describe('parse', function () {})
+  describe('parse', function () {
+    it('should return a string', function () {
+      assert.equal('string', typeof parser.parse(''))
+    })
+    it('should return false if there\'s invalid any javascript in the jcss', function () {
+      assert.ok(!parser.parse('asdf'))
+    })
+    it('should take jcss and return css', function () {
+      assert.equal('asdf', parser.parse('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
+    })
+  })
+
   describe('split', function () {
     var testJcss
     var testCss
@@ -25,6 +36,7 @@ describe('parser', function () {
       assert.equal('\n', parseReturn[0][1][parseReturn[0][1].length - 1])
     })
   })
+
   describe('exec', function () {
     it('should return a string', function () {
       assert.equal('string', typeof parser.exec(''))
