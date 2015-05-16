@@ -46,5 +46,19 @@ describe('fileHandler', function () {
     it('should be able to handle dots in filenames', function () {
       assert.equal('foo.bar.css', fileHandler.cssFilePath('foo.bar.jcss'))
     })
+  }),
+
+  describe('splitBasePath', function () {
+    it('should return and array with the start and the last file or directory name in a filepath', function () {
+      var testSplit = fileHandler.splitBasePath('/foo/bar/yolo/troll')
+      assert.ok(typeof testSplit == Object)
+      assert.equal('/foo/bar/yolo/', testSplit[0])
+      assert.equal('troll', testSplit[1])
+    })
+    it('should return an empty string and the passed value if it has no slashes', function () {
+      var testSplit = fileHandler.splitBasePath('yolo.42')
+      assert.equal('', testSplit[0])
+      assert.equal('yolo.42', testSplit[1])
+    })
   })
 })
