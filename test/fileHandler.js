@@ -51,7 +51,7 @@ describe('fileHandler', function () {
   describe('splitBasePath', function () {
     it('should return and array with the start and the last file or directory name in a filepath', function () {
       var testSplit = fileHandler.splitBasePath('/foo/bar/yolo/troll')
-      assert.ok(typeof testSplit == Object)
+      assert.equal('object', typeof testSplit)
       assert.equal('/foo/bar/yolo/', testSplit[0])
       assert.equal('troll', testSplit[1])
     })
