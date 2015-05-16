@@ -16,6 +16,6 @@ A CSS preprocessor that interprets simple JavaScript
 
 # Objects
 * main
-* fileHandler
+/ fileHandler
 * u
-* parser
+/ parser
