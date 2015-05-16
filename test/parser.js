@@ -4,22 +4,17 @@ var parser = require('../lib/parser.js')
 
 describe('parser', function () {
   describe('parse', function () {})
-  describe('splitJS', function () {
-    var testJcss = '\
-      div {\
-        display: block;\
-      }\
-      css(".class { display: none; }")\
-    '
-    var testCss = {css:  '\
-      div {\
-        display: block;\
-      }',
-      js:'\
-      css(".class { display: none; }")\
-    '}
-    it('should return an array of arrays with the inner array having js or css in the first position and a string at the second', function () {
-      var parseReturn = parser.splitJS(testJcss)
+  describe('split', function () {
+    var testJcss
+    var testCss
+    var parseReturn
+    before(function () {
+      testJcss = '\n        div {\n          display: block;\n        }\n        css(".class { display: none; }")\n      '
+      testCss = {css:  '\n        div {\n          display: block;\n        }',
+        js:'\n        css(".class { display: none; }")\n      '}
+      parseReturn = parser.split(testJcss)
+    })
+    it('should return an array of two arrays with the inner array having js or css in the first position and a string at the second', function () {
       assert.equal('object', typeof parseReturn)
       assert.equal(2, parseReturn[0].length)
       assert.ok(parseReturn[0][0] == 'js' || parseReturn[0][0] == 'css')
