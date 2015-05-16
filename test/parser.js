@@ -35,6 +35,11 @@ describe('parser', function () {
       assert.equal('\n', parseReturn[0][1][0])
       assert.equal('\n', parseReturn[0][1][parseReturn[0][1].length - 1])
     })
+    it('should be able to handle only js or only css', function () {
+      assert.equal('css("div{display:block;}")', parser.split('css("div{display:block;}")')[0][1])
+      assert.equal('div{display:block;}', parser.split('div{display:block;}')[0][1])
+      assert.equal('', parser.split('div{display:block;}')[1][1])
+    })
   })
 
   describe('exec', function () {
