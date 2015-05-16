@@ -15,6 +15,15 @@ describe('parser', function () {
     })
   })
 
+  describe('interpret', function () {
+    it('should exec js if the first position is js', function () {
+      assert.equal('asdf', parser.interpret(['js', '["a", "s", "d", "f"].forEach(function (value) { css(value) })']))
+    })
+    it('should return the passed string if the first position is css', function () {
+      assert.equal('display: block', parser.interpret(['css', 'display: block']))
+    })
+  })
+
   describe('split', function () {
     var testJcss
     var testCss
