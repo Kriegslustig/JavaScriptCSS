@@ -51,11 +51,11 @@ trolltrolltrolltrolltrolltrolltrolltroll\
         js:'\n        css(".class { display: none; }")\n      '}
       parseReturn = parser.split(testJcss)
     })
-    it('should return an array of two strings, the first is either js or css and the second is code', function () {
+    it('should return an array of three strings, the first is either js or css, the second is code and the third is the rest', function () {
       assert.equal('object', typeof parseReturn)
       assert.equal('string', typeof parseReturn[1])
       assert.equal('string', typeof parseReturn[0])
-      assert.equal(2, parseReturn.length)
+      assert.equal(3, parseReturn.length)
       assert.ok(parseReturn[0] == 'js' || parseReturn[0] == 'css')
     })
     it('should interpret all line endings before and after css as css', function () {
@@ -93,6 +93,25 @@ trolltrolltrolltrolltrolltrolltrolltroll\
           css(\'troll\')\
         }\
         ')[1])
+    })
+    it('should return the rest as the third position and false if there is nothing left', function () {
+      assert.equal('        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        ',
+        parser.split('div {\
+          display: block;\
+        }\
+        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        ')[2])
+      assert.equal(false,
+        parser.split('div {\
+          display: block;\
+        }')[1])
     })
   })
 
