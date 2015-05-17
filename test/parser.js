@@ -45,7 +45,7 @@ describe('parser', function () {
     var testCss
     var parseReturn
     before(function () {
-      testJcss = '\n        div {\n          display: block;\n        }\n        css(".class { display: none; }")\n\n      '
+      testJcss = '\n        div {\n          display: block;\n        }\n\n        css(".class { display: none; }")\n      '
       testCss = {css:  '\n        div {\n          display: block;\n        }',
         js:'\n        css(".class { display: none; }")\n      '}
       parseReturn = parser.split(testJcss)
