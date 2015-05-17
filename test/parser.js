@@ -115,21 +115,21 @@ trolltrolltrolltrolltrolltrolltrolltroll\
     })
   })
 
-  describe('getSubjectAndRest', function () {
+  describe('splitAfterSubstring', function () {
     it('should take two strings as arguments', function () {
-      assert.ok(parser.getSubjectAndRest(' 1', ' 1 '))
+      assert.ok(parser.splitAfterSubstring(' 1', ' 1 '))
     })
     it('should return an array of two strings', function () {
-      assert.equal('object', typeof parser.getSubjectAndRest(' 1', ' 1 '))
-      assert.equal(2, parser.getSubjectAndRest(' 1', ' 1 ').length)
-      assert.equal('string', typeof parser.getSubjectAndRest(' 1', ' 1 ')[0])
-      assert.equal('string', typeof parser.getSubjectAndRest(' 1', ' 1 ')[1])
+      assert.equal('object', typeof parser.splitAfterSubstring(' 1', ' 1 '))
+      assert.equal(2, parser.splitAfterSubstring(' 1', ' 1 ').length)
+      assert.equal('string', typeof parser.splitAfterSubstring(' 1', ' 1 ')[0])
+      assert.equal('string', typeof parser.splitAfterSubstring(' 1', ' 1 ')[1])
     })
     it('should return two substrings of the second', function () {
       var s1 = ' 1'
       var s2 = ' 1 '
-      assert.ok(s2.indexOf(parser.getSubjectAndRest(s1, s2)[0]) > -1)
-      assert.ok(s2.indexOf(parser.getSubjectAndRest(s1, s2)[1]) > -1)
+      assert.ok(s2.indexOf(parser.splitAfterSubstring(s1, s2)[0]) > -1)
+      assert.ok(s2.indexOf(parser.splitAfterSubstring(s1, s2)[1]) > -1)
     })
   })
 
