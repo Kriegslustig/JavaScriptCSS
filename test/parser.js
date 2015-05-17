@@ -135,7 +135,7 @@ trolltrolltrolltrolltrolltrolltrolltroll\
       assert.equal(' ', parser.splitAroundSubstring('1 ', ' 1 ')[0])
     })
     it('should return a string including the substring as the second return value if the substring isn\'t at the start of the string', function () {
-      assert.equal('1 -', parser.splitAroundSubstring(' 1 -', '1 ')[1])
+      assert.equal('1 -', parser.splitAroundSubstring('1 ', ' 1 -')[1])
     })
   })
 
