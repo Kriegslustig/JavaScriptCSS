@@ -13,6 +13,18 @@ describe('parser', function () {
     it('should take jcss and return css', function () {
       assert.equal('asdf', parser.parse('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
       assert.equal('div {\n  display: block;\n}\ntroll', parser.parse('div {\n  display: block;\n}\n  css(\'troll\')'))
+      assert.equal('div {\
+          display: block;\
+        }\
+        \
+        trolltrolltrolltrolltrolltrolltrolltrolltroll', parser.parse('div {\
+          display: block;\
+        }\
+        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        '))
     })
     it('should return false if false is passed to it', function () {
       assert.equal(false, parser.parse(false))
