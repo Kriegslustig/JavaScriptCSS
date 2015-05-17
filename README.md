@@ -4,9 +4,9 @@ A CSS preprocessor that interprets simple JavaScript
 # ToDo
 
 ## Features - ToDo
-* Evaluate CSS
-* Evaluate Javascript
-* Variables
+/ Evaluate CSS
+/ Evaluate Javascript
+- Variables
 * Execute functions inside CSS
 * Includes
   * Globbing
@@ -15,7 +15,6 @@ A CSS preprocessor that interprets simple JavaScript
 ## Features - Done
 
 # Objects
-* main
+/ main
 / fileHandler
-* u
 / parser
