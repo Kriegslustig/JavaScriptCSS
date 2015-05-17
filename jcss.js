@@ -1,9 +1,7 @@
+var main = require('./lib/main.js')
 var fileHandler = require('./lib/fileHandler.js')
 var parser = require('./lib/parser.js')
 
-function main (jcssFilePath) {
-  if(!jcssFilePath) return 1
-  return fileHandler.write(fileHandler.cssFilePath(jcssFilePath), parser.parse(fileHandler.read(jcssFilePath))) ? 0 : 1
+if(process.argv.length > 2) {
+  main(process.argv[2])
 }
-
-module.exports = main

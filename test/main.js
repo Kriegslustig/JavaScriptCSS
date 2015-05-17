@@ -1,7 +1,7 @@
 var assert = require('assert')
 var fs = require('fs')
 
-var main = require('../jcss.js')
+var main = require('../lib/main.js')
 
 describe('main', function () {
   it('should take require at least one arguments', function () {
@@ -22,6 +22,7 @@ describe('main', function () {
       fs.readdir('./', function (err, dir) {
         assert.ok(dir.indexOf(testFileName + '.css') > -1)
         deleteTestFiles()
+        done()
       })
     })
   })
