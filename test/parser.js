@@ -12,6 +12,7 @@ describe('parser', function () {
     })
     it('should take jcss and return css', function () {
       assert.equal('asdf', parser.parse('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
+      assert.equal('div {\n  display: block;\n}\ntroll', parser.parse('div {\n  display: block;\n}\n  css(\'troll\')'))
     })
     it('should return false if false is passed to it', function () {
       assert.equal(false, parser.parse(false))
