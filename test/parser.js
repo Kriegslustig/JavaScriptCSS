@@ -16,8 +16,8 @@ describe('parser', function () {
       assert.equal('div {\
           display: block;\
         }\
-        \
-        trolltrolltrolltrolltrolltrolltrolltrolltroll', parser.parse('div {\
+\
+trolltrolltrolltrolltrolltrolltrolltroll', parser.parse('div {\
           display: block;\
         }\
         \
