@@ -17,10 +17,10 @@ describe('main', function () {
       fs.unlink(testFileName + '.css')
       fs.unlink(testFileName + '.jcss')
     }
-    fs.writeFile(testFile + '.jcss', testString, function () {
-      main(testFile + '.jcss')
+    fs.writeFile(testFileName + '.jcss', testString, function () {
+      main(testFileName + '.jcss')
       fs.readdir('./', function (err, dir) {
-        assert.ok(dir.indexOf(testFile + '.css') > -1)
+        assert.ok(dir.indexOf(testFileName + '.css') > -1)
         deleteTestFiles()
       })
     })
