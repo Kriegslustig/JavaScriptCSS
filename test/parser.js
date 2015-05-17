@@ -115,21 +115,27 @@ trolltrolltrolltrolltrolltrolltrolltroll\
     })
   })
 
-  describe('splitAfterSubstring', function () {
+  describe('splitAroundSubstring', function () {
     it('should take two strings as arguments', function () {
-      assert.ok(parser.splitAfterSubstring(' 1', ' 1 '))
+      assert.ok(parser.splitAroundSubstring(' 1', ' 1 '))
     })
     it('should return an array of two strings', function () {
-      assert.equal('object', typeof parser.splitAfterSubstring(' 1', ' 1 '))
-      assert.equal(2, parser.splitAfterSubstring(' 1', ' 1 ').length)
-      assert.equal('string', typeof parser.splitAfterSubstring(' 1', ' 1 ')[0])
-      assert.equal('string', typeof parser.splitAfterSubstring(' 1', ' 1 ')[1])
+      assert.equal('object', typeof parser.splitAroundSubstring(' 1', ' 1 '))
+      assert.equal(2, parser.splitAroundSubstring(' 1', ' 1 ').length)
+      assert.equal('string', typeof parser.splitAroundSubstring(' 1', ' 1 ')[0])
+      assert.equal('string', typeof parser.splitAroundSubstring(' 1', ' 1 ')[1])
     })
     it('should return two substrings of the second', function () {
       var s1 = ' 1'
       var s2 = ' 1 '
-      assert.ok(s2.indexOf(parser.splitAfterSubstring(s1, s2)[0]) > -1)
-      assert.ok(s2.indexOf(parser.splitAfterSubstring(s1, s2)[1]) > -1)
+      assert.ok(s2.indexOf(parser.splitAroundSubstring(s1, s2)[0]) > -1)
+      assert.ok(s2.indexOf(parser.splitAroundSubstring(s1, s2)[1]) > -1)
+    })
+    it('should return everything before the passed substring as the first return value if there is anything', function () {
+      assert.equal(' ', parser.splitAroundSubstring('1 ', ' 1 ')[0])
+    })
+    it('should return a string including the substring as the second return value if the substring isn\'t at the start of the string', function () {
+      assert.equal('1 -', parser.splitAroundSubstring(' 1 -', '1 ')[1])
     })
   })
 
