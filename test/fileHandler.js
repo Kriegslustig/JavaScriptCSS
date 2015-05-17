@@ -31,6 +31,10 @@ describe('fileHandler', function () {
     it('Should write the first argument to the file', function () {
       assert.equal(testString, fs.readFileSync(testFile, {encoding: 'utf8'}))
     })
+    it('Should return false if any of the arguments is false', function () {
+      assert.equal(false, fileHandler.write(false, ' '))
+      assert.equal(false, fileHandler.write(' ', false))
+    })
     after(function () {
       fs.unlink(testFile)
     })
