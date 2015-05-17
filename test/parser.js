@@ -21,7 +21,7 @@ describe('parser', function () {
           display: block;\
         }\
         \
-        for(var i = 10; i < 0; i--) {\
+        for(var i = 10; i > 0; i--) {\
           css(\'troll\')\
         }\
         '))
@@ -45,7 +45,7 @@ describe('parser', function () {
     var testCss
     var parseReturn
     before(function () {
-      testJcss = '\n        div {\n          display: block;\n        }\n        css(".class { display: none; }")\n      '
+      testJcss = '\n        div {\n          display: block;\n        }\n        css(".class { display: none; }")\n\n      '
       testCss = {css:  '\n        div {\n          display: block;\n        }',
         js:'\n        css(".class { display: none; }")\n      '}
       parseReturn = parser.split(testJcss)
@@ -56,9 +56,10 @@ describe('parser', function () {
       assert.ok(parseReturn[0][0] == 'js' || parseReturn[0][0] == 'css')
       assert.equal('string', typeof parseReturn[0][1])
     })
-    it('should interpret line endings before and after css as css', function () {
+    it('should interpret all line endings before and after css as css', function () {
       assert.equal('\n', parseReturn[0][1][0])
       assert.equal('\n', parseReturn[0][1][parseReturn[0][1].length - 1])
+      assert.equal('\n', parseReturn[0][1][parseReturn[0][1].length - 2])
     })
     it('should be able to handle only js or only css', function () {
       assert.equal('css("div{display:block;}")', parser.split('css("div{display:block;}")')[0][1])
