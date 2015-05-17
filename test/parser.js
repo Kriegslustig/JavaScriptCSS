@@ -56,6 +56,20 @@ describe('parser', function () {
     it('should return false if the passed string is empty', function () {
       assert.equal(false, parser.split(''))
     })
+    it('should mark css and js as such', function () {
+      assert.equal('        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        ', parser.split('div {\
+          display: block;\
+        }\
+        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        ')[1][1])
+    })
   })
 
   describe('exec', function () {
