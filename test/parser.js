@@ -17,14 +17,15 @@ describe('parser', function () {
           display: block;\
         }\
 \
-trolltrolltrolltrolltrolltrolltrolltroll', parser.parse('div {\
+trolltrolltrolltrolltrolltrolltrolltroll\
+        div { display: hidden; }', parser.parse('div {\
           display: block;\
         }\
         \
         for(var i = 10; i > 0; i--) {\
           css(\'troll\')\
         }\
-        '))
+        div { display: hidden; }'))
     })
     it('should return false if false is passed to it', function () {
       assert.equal(false, parser.parse(false))
