@@ -51,38 +51,48 @@ trolltrolltrolltrolltrolltrolltrolltroll\
         js:'\n        css(".class { display: none; }")\n      '}
       parseReturn = parser.split(testJcss)
     })
-    it('should return an array of two arrays with the inner array having js or css in the first position and a string at the second', function () {
+    it('should return an array of two strings, the first is either js or css and the second is code', function () {
       assert.equal('object', typeof parseReturn)
-      assert.equal(2, parseReturn[0].length)
-      assert.ok(parseReturn[0][0] == 'js' || parseReturn[0][0] == 'css')
-      assert.equal('string', typeof parseReturn[0][1])
+      assert.equal('string', typeof parseReturn[1])
+      assert.equal('string', typeof parseReturn[0])
+      assert.equal(2, parseReturn.length)
+      assert.ok(parseReturn[0] == 'js' || parseReturn[0] == 'css')
     })
     it('should interpret all line endings before and after css as css', function () {
-      assert.equal('\n', parseReturn[0][1][0])
-      assert.equal('\n', parseReturn[0][1][parseReturn[0][1].length - 1])
-      assert.equal('\n', parseReturn[0][1][parseReturn[0][1].length - 2])
+      assert.equal('\n', parseReturn[1][0])
+      assert.equal('\n', parseReturn[1][parseReturn[1].length - 1])
+      assert.equal('\n', parseReturn[1][parseReturn[1].length - 2])
     })
     it('should be able to handle only js or only css', function () {
-      assert.equal('css("div{display:block;}")', parser.split('css("div{display:block;}")')[0][1])
-      assert.equal('div{display:block;}', parser.split('div{display:block;}')[0][1])
-      assert.equal('', parser.split('div{display:block;}')[1][1])
+      assert.equal('css("div{display:block;}")', parser.split('css("div{display:block;}")')[1])
+      assert.equal('div{display:block;}', parser.split('div{display:block;}')[1])
     })
     it('should return false if the passed string is empty', function () {
       assert.equal(false, parser.split(''))
     })
     it('should mark css and js as such', function () {
-      assert.equal('        \
-        for(var i = 10; i < 0; i--) {\
-          css(\'troll\')\
+      assert.equal('div {\
+          display: block;\
         }\
-        ', parser.split('div {\
+',
+        parser.split('div {\
           display: block;\
         }\
         \
         for(var i = 10; i < 0; i--) {\
           css(\'troll\')\
         }\
-        ')[1][1])
+        ')[1])
+      assert.equal('        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        ',
+        parser.split('        \
+        for(var i = 10; i < 0; i--) {\
+          css(\'troll\')\
+        }\
+        ')[1])
     })
   })
 
