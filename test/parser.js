@@ -13,7 +13,7 @@ describe('parser', function () {
     it('should take jcss and return css', function () {
       assert.equal('asdf', parser.parse('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
       assert.equal('div {\n  display: block;\n}\ntroll', parser.parse('div {\n  display: block;\n}\n  css(\'troll\')'))
-      assert.equal('div {\n          display: block;\n        }\ntrolltrolltrolltrolltrolltrolltrolltroll\n        div { display: hidden; }', parser.parse('div {\n          display: block;\n        }\n        \n        for(var i = 10; i > 0; i--) {\n          css(\'troll\')\n        }\n\n        div { display: hidden; }'))
+      assert.equal('div {\n          display: block;\n        }\ntrolltrolltrolltrolltrolltrolltrolltrolltrolltroll\n        div { display: hidden; }', parser.parse('div {\n          display: block;\n        }\n        \n        for(var i = 10; i > 0; i--) {\n          css(\'troll\')\n        }\n\n        div { display: hidden; }'))
     })
     it('should return false if false is passed to it', function () {
       assert.equal(false, parser.parse(false))
