@@ -13,19 +13,7 @@ describe('parser', function () {
     it('should take jcss and return css', function () {
       assert.equal('asdf', parser.parse('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
       assert.equal('div {\n  display: block;\n}\ntroll', parser.parse('div {\n  display: block;\n}\n  css(\'troll\')'))
-      assert.equal('div {\
-          display: block;\
-        }\
-\
-trolltrolltrolltrolltrolltrolltrolltroll\
-        div { display: hidden; }', parser.parse('div {\
-          display: block;\
-        }\
-        \
-        for(var i = 10; i > 0; i--) {\
-          css(\'troll\')\
-        }\
-        div { display: hidden; }'))
+      assert.equal('div {\n          display: block;\n        }\ntrolltrolltrolltrolltrolltrolltrolltroll\n        div { display: hidden; }', parser.parse('div {\n          display: block;\n        }\n        \n        for(var i = 10; i > 0; i--) {\n          css(\'troll\')\n        }\n\n        div { display: hidden; }'))
     })
     it('should return false if false is passed to it', function () {
       assert.equal(false, parser.parse(false))
@@ -71,47 +59,16 @@ trolltrolltrolltrolltrolltrolltrolltroll\
       assert.equal(false, parser.split(''))
     })
     it('should mark css and js as such', function () {
-      assert.equal('div {\
-          display: block;\
-        }\
-',
-        parser.split('div {\
-          display: block;\
-        }\
-        \
-        for(var i = 10; i < 0; i--) {\
-          css(\'troll\')\
-        }\
-        ')[1])
-      assert.equal('        \
-        for(var i = 10; i < 0; i--) {\
-          css(\'troll\')\
-        }\
-        ',
-        parser.split('        \
-        for(var i = 10; i < 0; i--) {\
-          css(\'troll\')\
-        }\
-        ')[1])
+      assert.equal('div {\n          display: block;\n        }\n',
+        parser.split('div {\n          display: block;\n        }\n        \n        for(var i = 10; i < 0; i--) {\n          css(\'troll\')\n        }\n        ')[1])
+      assert.equal('        \n        for(var i = 10; i < 0; i--) {\n          css(\'troll\')\n        }\n        ',
+        parser.split('        \n        for(var i = 10; i < 0; i--) {\n          css(\'troll\')\n        }\n        ')[1])
     })
     it('should return the rest as the third position and false if there is nothing left', function () {
-      assert.equal('        \
-        for(var i = 10; i < 0; i--) {\
-          css(\'troll\')\
-        }\
-        ',
-        parser.split('div {\
-          display: block;\
-        }\
-        \
-        for(var i = 10; i < 0; i--) {\
-          css(\'troll\')\
-        }\
-        ')[2])
+      assert.equal('        \n        for(var i = 10; i < 0; i--) {\n          css(\'troll\')\n        }\n        ',
+        parser.split('div {\n          display: block;\n        }\n        \n        for(var i = 10; i < 0; i--) {\n          css(\'troll\')\n        }\n        ')[2])
       assert.equal(false,
-        parser.split('div {\
-          display: block;\
-        }')[2])
+        parser.split('div {\n          display: block;\n        }')[2])
     })
   })
 
