@@ -187,4 +187,16 @@ describe('parser', function () {
       assert.equal('asdf', parser.exec('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
     })
   })
+
+  describe('funcsToString', function () {
+    it('should take an array of functions as an argument', function () {
+      assert.ok(parser.funcsToString([function a () {}]))
+    })
+    it('should return a string', function () {
+      assert.equal('string', typeof parser.funcsToString([function a () {}]))
+    })
+    it('should join the functions with newlines', function () {
+      assert.ok(parser.funcsToString([function a () {}]).indexOf('\n') > -1)
+    })
+  })
 })
