@@ -196,10 +196,10 @@ describe('parser', function () {
       assert.equal('string', typeof parser.funcsToString([function a () {}]))
     })
     it('should join the functions with newlines', function () {
-      assert.ok(parser.funcsToString([function a () {}, function a () {}]).indexOf('\n') > 1)
+      assert.ok(parser.funcsToString([function a () {}, function a () {}]).indexOf('\n') > -1)
     })
     it('should add a newline in to the beginning of the string', function () {
-      assert.equal('\n', parser.funcsToString([function a () {}]))
+      assert.equal('\n', parser.funcsToString([function a () {}])[0])
     })
   })
 })
