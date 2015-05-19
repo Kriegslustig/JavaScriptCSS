@@ -24,7 +24,7 @@ describe('parser', function () {
       parser.parse('$.someString = \'someString\'')
       assert.equal('someString', parser.stateJcssVars['someString'])
       testString = parser.parse('$.someString = \'someOtherString\' \n div {display:$.someString}')
-      assert.equal('\n div {display:someOtherString}', testString)
+      assert.equal(' div {display:someOtherString}', testString)
       testString = parser.parse('\n div {display:$.someString}')
       assert.equal('\n div {display:someOtherString}', testString)
     })
