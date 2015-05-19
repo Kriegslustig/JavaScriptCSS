@@ -127,6 +127,16 @@ describe('parser', function () {
       assert.equal('css', parser.split('E ~ F' + testCss)[0])
     })
 
+    it('should be able to recognize mediaqueries as such', function () {assert.equal('css', parser.split('@media all and (min-width:500px) { … }')[0])
+        assert.equal('css', parser.split('@media (min-width:500px) { … }')[0])
+        assert.equal('css', parser.split('@media (orientation: portrait) { … }')[0])
+        assert.equal('css', parser.split('@media all and (orientation: portrait) { … }')[0])
+        assert.equal('css', parser.split('@media screen and (color), projection and (color) { … }')[0])
+        assert.equal('css', parser.split('@media all and (min-color: 2) { … }')[0])
+        assert.equal('css', parser.split('@media all { … }')[0])
+        assert.equal('css', parser.split('@media { … }')[0])
+    })
+
     it('should recognize all js as not css', function () {
       assert.equal('js', parser.split('if(true) {return false}')[0])
       assert.equal('js', parser.split('if(x = y) return something')[0])
