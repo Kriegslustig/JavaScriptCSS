@@ -18,6 +18,16 @@ describe('parser', function () {
     it('should return false if false is passed to it', function () {
       assert.equal(false, parser.parse(false))
     })
+
+    it('should be able to set, use and reset variables', function () {
+      var testString
+      parser.parse('$.someString = \'someString\'')
+      assert.equal('someString', parser.stateJcssVars['someString'])
+      testString = parser.parse('$.someString = \'someOtherString\' \n div {display:$.someString}')
+      assert.equal('\n div {display:someOtherString}', testString)
+      testString = parser.parse('\n div {display:$.someString}')
+      assert.equal('\n div {display:someOtherString}', testString)
+    })
   })
 
   describe('interpret', function () {
