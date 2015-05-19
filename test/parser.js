@@ -232,9 +232,9 @@ describe('parser', function () {
 
   describe('makeIncludes', function () {
     it('should replace calles to include in parsed jcss files', function () {
-      var testFile= './testfile.jcss'
+      var testFile = './testfile.jcss'
       fs.writeFileSync(testFile, 'css(\'div{display: block}\')')
-      assert.equal('div{display: block}', parser.makeIncludes('include(\'./' + testFile + '\')'))
+      assert.equal('div{display: block}', parser.makeIncludes('include(\'' + testFile + '\')'))
       fs.unlink(testFile)
     })
   })
