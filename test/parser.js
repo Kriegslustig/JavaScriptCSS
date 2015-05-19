@@ -128,7 +128,7 @@ describe('parser', function () {
 
   describe('parseCssVars', function () {
     it('should take a string and return one', function () {
-      assert.equal('string', parser.parseCssVars(''))
+      assert.equal('string', typeof parser.parseCssVars(''))
     })
     it('should replace variables starting with `$.` with its values', function () {
       parser.stateJcssVars = { s: 'something' }
@@ -145,7 +145,7 @@ describe('parser', function () {
     })
     it('should be able to pick out vars in the middle of css', function () {
       parser.stateJcssVars = { str: 'block' }
-      assert.equal('div { display: $.str; }')
+      assert.equal('div { display: block; }', parser.parseCssVars('div { display: $.str; }'))
     })
   })
 
