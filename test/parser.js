@@ -196,7 +196,7 @@ describe('parser', function () {
       assert.equal('string', typeof parser.funcsToString([function a () {}]))
     })
     it('should join the functions with newlines', function () {
-      assert.ok(parser.funcsToString([function a () {}]).indexOf('\n') > -1)
+      assert.ok(parser.funcsToString([function a () {}, function a () {}]).indexOf('\n') > -1)
     })
   })
 })
