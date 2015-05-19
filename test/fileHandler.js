@@ -42,13 +42,13 @@ describe('fileHandler', function () {
 
   describe('cssFilePath', function () {
     it('should replace the file extesion with css', function () {
-      assert.equal('someFile.css', fileHandler.cssFilePath('someFile.jcss'))
+      assert.equal('someFile.css', fileHandler.cssFilePath('someFile.jsheet'))
     })
     it('should add an extension if there isn\'t one', function () {
       assert.equal('asdf/somefile.css', fileHandler.cssFilePath('asdf/somefile'))
     })
     it('should be able to handle dots in filenames', function () {
-      assert.equal('foo.bar.css', fileHandler.cssFilePath('foo.bar.jcss'))
+      assert.equal('foo.bar.css', fileHandler.cssFilePath('foo.bar.jsheet'))
     })
   })
 
@@ -71,7 +71,7 @@ describe('fileHandler', function () {
       assert.equal('somefile.css', fileHandler.setFileExt('somefile', 'css'))
     })
     it('should replace the file extension if there alreay is one', function () {
-      assert.equal('some_file.css', fileHandler.setFileExt('some_file.jcss', 'css'))
+      assert.equal('some_file.css', fileHandler.setFileExt('some_file.jsheet', 'css'))
     })
     it('should be able to handle dots in filenames', function () {
       assert.equal('yolo.42.txt', fileHandler.setFileExt('yolo.42.xml', 'txt'))

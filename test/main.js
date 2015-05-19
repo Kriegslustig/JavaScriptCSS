@@ -15,10 +15,10 @@ describe('main', function () {
     var testString = 'div {display: block;}'
     function deleteTestFiles () {
       fs.unlink(testFileName + '.css')
-      fs.unlink(testFileName + '.jcss')
+      fs.unlink(testFileName + '.jsheet')
     }
-    fs.writeFile(testFileName + '.jcss', testString, function () {
-      main(testFileName + '.jcss')
+    fs.writeFile(testFileName + '.jsheet', testString, function () {
+      main(testFileName + '.jsheet')
       fs.readdir('./', function (err, dir) {
         assert.ok(dir.indexOf(testFileName + '.css') > -1)
         deleteTestFiles()

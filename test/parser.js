@@ -8,10 +8,10 @@ describe('parser', function () {
     it('should return a string', function () {
       assert.equal('string', typeof parser.parse(''))
     })
-    it('should return false if there\'s invalid any javascript in the jcss', function () {
+    it('should return false if there\'s invalid any javascript in the jsheet', function () {
       assert.ok(!parser.parse('asdf'))
     })
-    it('should take jcss and return css', function () {
+    it('should take jsheet and return css', function () {
       assert.equal('asdf', parser.parse('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
       assert.equal('div {\n  display: block;\n}\ntroll', parser.parse('div {\n  display: block;\n}\n  css(\'troll\')'))
       assert.equal('div {\n          display: block;\n        }\ntrolltrolltrolltrolltrolltrolltrolltrolltrolltroll\n        div { display: hidden; }', parser.parse('div {\n          display: block;\n        }\n        \n        for(var i = 10; i > 0; i--) {\n          css(\'troll\')\n        }\n\n        div { display: hidden; }'))
@@ -215,14 +215,14 @@ describe('parser', function () {
   })
 
   describe('include', function () {
-    it('should read and parse a jcss file', function () {
-      var testFile = './testfile.jcss'
+    it('should read and parse a jsheet file', function () {
+      var testFile = './testfile.jsheet'
       fs.writeFileSync(testFile, 'css(\'div{display: block}\')')
       assert.equal('div{display: block}', parser.include(testFile))
       fs.unlink(testFile)
     })
-    it('should log an error and return an empty string if the jcss is invalid or if the file doesn\'t exsist', function () {
-      var testFile = './testfile.jcss'
+    it('should log an error and return an empty string if the jsheet is invalid or if the file doesn\'t exsist', function () {
+      var testFile = './testfile.jsheet'
       assert.equal('', parser.include('asddgere.cevrscs'))
       fs.writeFileSync(testFile, 'css(\'div{display: block}\')yoomum')
       assert.equal('', parser.include(testFile))
@@ -231,8 +231,8 @@ describe('parser', function () {
   })
 
   describe('makeIncludes', function () {
-    it('should replace calles to include in parsed jcss files', function () {
-      var testFile = './testfile.jcss'
+    it('should replace calles to include in parsed jsheet files', function () {
+      var testFile = './testfile.jsheet'
       fs.writeFileSync(testFile, 'css(\'div{display: block}\')')
       assert.equal('div{display: block}', parser.makeIncludes('include(\'' + testFile + '\')'))
       fs.unlink(testFile)
