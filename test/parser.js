@@ -126,6 +126,29 @@ describe('parser', function () {
     })
   })
 
+  describe('parseCssVars', function () {
+    it('should take a string and return one', function () {
+      assert.equal('string', parser.parseCssVars(''))
+    })
+    it('should replace variables starting with `$.` with its values', function () {
+      parser.stateJcssVars = { s: 'something' }
+      assert.equal('something', parser.parseCssVars('$.s'))
+    })
+    it('should replace function calls starting with `$.` with its return values', function () {
+      var someString = 'someString'
+      parser.stateJcssVars = { f: function () { return someString } }
+      assert.equal(someString, parser.parseCssVars('$.f()'))
+    })
+    it('should be able to handle arguments passed to functions', function () {
+      parser.stateJcssVars = { add: function (n0, n1) { return n0 + n1 } }
+      assert.equal(2, parser.parseCssVars('$.add(1,1)'))
+    })
+    it('should be able to pick out vars in the middle of css', function () {
+      parser.stateJcssVars = { str: 'block' }
+      assert.equal('div { display: $.str; }')
+    })
+  })
+
   describe('splitAroundSubstring', function () {
     it('should take two strings as arguments', function () {
       assert.ok(parser.splitAroundSubstring(' 1', ' 1 '))
