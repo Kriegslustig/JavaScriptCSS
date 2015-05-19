@@ -127,7 +127,8 @@ describe('parser', function () {
       assert.equal('css', parser.split('E ~ F' + testCss)[0])
     })
 
-    it('should be able to recognize mediaqueries as such', function () {assert.equal('css', parser.split('@media all and (min-width:500px) { … }')[0])
+    it('should be able to recognize mediaqueries as such', function () {
+        assert.equal('css', parser.split('@media all and (min-width:500px) { … }')[0])
         assert.equal('css', parser.split('@media (min-width:500px) { … }')[0])
         assert.equal('css', parser.split('@media (orientation: portrait) { … }')[0])
         assert.equal('css', parser.split('@media all and (orientation: portrait) { … }')[0])
