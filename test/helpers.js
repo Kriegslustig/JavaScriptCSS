@@ -1,4 +1,5 @@
-var helpers = require('../lib/helpers.js')
+var assert = require('assert')
+var helpers = require('../helpers/helpers.js')
 
 describe('helpers', function () {
   describe('$', function () {

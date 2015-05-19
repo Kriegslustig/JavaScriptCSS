@@ -1,3 +1,4 @@
+var assert = require('assert')
 var utilities = require('../lib/utilities.js')
 
 describe('utilities', function () {
