@@ -1,4 +1,5 @@
 var assert = require('assert')
+var fs = require('fs')
 
 var parser = require('../lib/parser.js')
 
@@ -210,6 +211,22 @@ describe('parser', function () {
     })
     it('should add a newline in to the beginning of the string', function () {
       assert.equal('\n', parser.funcsToString([function a () {}])[0])
+    })
+  })
+
+  describe('include', function () {
+    it('should read and parse a jcss file', function () {
+      var testFile = './testfile.jcss'
+      fs.writeFileSync(testFile, 'css(\'div{display: block}\')')
+      assert.equal('div{display: block}', parser.include(testFile))
+      fs.unlink(testFile)
+    })
+    it('should log an error and return an empty string if the jcss is invalid or if the file doesn\'t exsist', function () {
+      var testFile = './testfile.jcss'
+      assert.equal('', parser.include('asddgere.cevrscs'))
+      fs.writeFileSync(testFile, 'css(\'div{display: block}\')yoomum')
+      assert.equal('', parser.include(testFile))
+      fs.unlink(testFile)
     })
   })
 })
