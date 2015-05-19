@@ -115,6 +115,15 @@ describe('parser', function () {
       assert.equal('css', parser.split('E + F' + testCss)[0])
       assert.equal('css', parser.split('E ~ F' + testCss)[0])
     })
+
+    it('should recognize all js as not css', function () {
+      assert.equal('js', parser.split('if(true) {return false}')[0])
+      assert.equal('js', parser.split('if(x = y) return something')[0])
+      assert.equal('js', parser.split('while(someFun()) {i++}')[0])
+      assert.equal('js', parser.split('arr[0] = {i: y}')[0])
+      assert.equal('js', parser.split('arr[\'d\'] = {i: y}')[0])
+      assert.equal('js', parser.split('arr[\'d\']={i: y}')[0])
+    })
   })
 
   describe('splitAroundSubstring', function () {
