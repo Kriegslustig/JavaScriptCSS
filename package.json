@@ -14,13 +14,17 @@
   "bin": {
     "jsheets": "./jsheets.js"
   },
+  "main": "./lib/jsheets.js",
+  "man": "man/jsheets.1",
   "devDependencies": {
-    "mocha": "latest"
+    "mocha": "latest",
+    "marked-man": "latest"
   },
   "dependencies": {
     "underscore": "latest"
   },
   "scripts": {
-    "test": "mocha tests/"
+    "test": "mocha tests/",
+    "build-man": "marked-man README.md > man/jsheets.1"
   }
 }
