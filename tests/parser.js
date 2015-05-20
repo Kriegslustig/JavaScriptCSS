@@ -29,6 +29,10 @@ describe('parser', function () {
       testString = parser.parse('\n div {display:$.someString}')
       assert.equal('\n div {display:someOtherString}', testString)
     })
+
+    it('Should keep variables in global space', function () {
+      assert.equal('a{...}\ntrue', parser.parse('var testVar = true \na{...}\ncss(testVar)'))
+    })
   })
 
   describe('interpret', function () {
