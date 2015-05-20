@@ -12,6 +12,9 @@ describe('utilities', function () {
     it('should return a function that calles a function on its argument, the function name is passed to caller', function () {
       assert.ok(utilities.caller('0')([function () {return true}]))
     })
+    it('should run the function passed to it if no key is specified', function () {
+      assert.ok(utilities.caller()(function () {return true}))
+    })
   })
 
   describe('runArray', function () {
