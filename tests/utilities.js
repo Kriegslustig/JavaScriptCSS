@@ -23,7 +23,8 @@ describe('utilities', function () {
     })
     it('should run all functions in an array', function () {
       var tst = 0
-      assert.equal(2, utilities.runArray([function () {tst++}, function () {tst++}]))
+      utilities.runArray([function () {tst++}, function () {tst++}])
+      assert.equal(2, tst)
     })
   })
 })
