@@ -1,6 +1,85 @@
-.TH "JAVASCRIPTCSS" "" "May 2015" "" ""
+.TH "JSHEETS" "" "May 2015" "" ""
 .SH "NAME"
-\fBJavaScriptCSS\fR
+\fBjsheets\fR
+.SH NAME
 .P
-A CSS preprocessor that interprets simple JavaScript
+jsheets \- A simple CSS preprocessor that interprets JavaScript
+.SH SYNOPSYS
+.P
+\fBjsheets \fIfile\fR\fR
+.SH DESCRIPTION
+.P
+Jsheets is a CSS preprocessor that executes JavaScript\. It also replaces function calls and variables inside CSS\. A simple approach to CSS preprocessing\.
+.SH SYNTAX
+.P
+There are three things special about jsheets:
+.SS The \fB$\fR Object
+.P
+Inside CSS the whole \fB$\fR object is availible to you\. That's it\.
+.P
+.RS 2
+.nf
+div {
+  background: $\.someColor;
+}
+.fi
+.RE
+.SS \fBimport\fR
+.P
+With \fBimport\fR you can import files to a jsheet\. Its usage is straight forward:
+.P
+.RS 2
+.nf
+import 'somefile\.jsheet'
+.fi
+.RE
+.SS \fBcss()\fR
+.P
+With the \fBcss\fR function you can output css\. So you can do:
+.P
+.RS 2
+.nf
+css('div {display: block}')
+.fi
+.RE
+.SS helpers
+.P
+Because underscore is used in the project, I thought i'd pass it to the jsheets\. There are also some helpers provided inside the \fB$\fR object\.
+.SS $
+.P
+\fB$\.$\fR is a function that executes and returns what is passed to it\. So for example:
+.P
+.RS 2
+.nf
+div {
+  width: $\.$(100 * 30)px
+}
+.fi
+.RE
+.P
+You cannot use braces inside of a call to \fB$\.$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
+.SH ROADMAP
+.P
+I'm pretty ok with the package as it stands right now\. But there are a lot of things I plan to implement\.
+.RS 0
+.IP \(bu 2
+Globbing
+.IP \(bu 2
+Integration
+.RS 0
+.IP \(bu 2
+express
+.IP \(bu 2
+meteor
+
+.RE
+.IP \(bu 2
+Highlighting
+.RS 0
+.IP \(bu 2
+SublimeText
+
+.RE
+
+.RE
 
