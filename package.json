@@ -1,5 +1,19 @@
 {
   "name": "jsheets",
+  "version": "0.0.1",
+  "description": "A simple CSS preprocessor that interprets JavaScript",
+  "author": {
+    "name": "Kriegslustig"
+  },
+  "keywords": ["CSS", "Preprocessor", "CSS Preprocessor", "JavaScript"],
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/Kriegslustig/jsheets",
+    "type": "git"
+  },
+  "bin": {
+    "jsheets": "./jsheets.js"
+  },
   "devDependencies": {
     "mocha": "latest"
   },
