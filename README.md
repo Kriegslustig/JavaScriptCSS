@@ -9,7 +9,6 @@ jsheets - A simple CSS preprocessor that interprets JavaScript
 Jsheets is a CSS preprocessor that executes JavaScript. It also replaces function calls and variables inside CSS. A simple approach to CSS preprocessing.
 
 ## SYNTAX
-There are three things special about jsheets:
 
 ### The `$` Object
 Inside CSS the whole `$` object is availible to you. That's it.
@@ -33,6 +32,9 @@ With the `css` function you can output css. So you can do:
 ```
 css('div {display: block}')
 ```
+
+### Variable Scope
+The variable scope is global everywhere
 
 ### helpers
 Because underscore is used in the project, I thought i'd pass it to the jsheets. There are also some helpers provided inside the `$` object.
