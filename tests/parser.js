@@ -23,11 +23,15 @@ describe('parser', function () {
     it('should be able to set, use and reset variables', function () {
       var testString
       parser.parse('$.someString = \'someString\'')
-      assert.equal('someString', parser.stateJcssVars['someString'])
+      assert.equal('someString', parser.context['$']['someString'])
       testString = parser.parse('$.someString = \'someOtherString\' \n div {display:$.someString}')
       assert.equal(' div {display:someOtherString}', testString)
       testString = parser.parse('\n div {display:$.someString}')
       assert.equal('\n div {display:someOtherString}', testString)
+    })
+
+    it('Should keep variables in global space', function () {
+      assert.equal('a{...}\ntrue', parser.parse('var testVar = true \na{...}\ncss(testVar)'))
     })
   })
 
@@ -153,20 +157,20 @@ describe('parser', function () {
       assert.equal('string', typeof parser.parseCssVars(''))
     })
     it('should replace variables starting with `$.` with its values', function () {
-      parser.stateJcssVars = { s: 'something' }
+      parser.context.$ = { s: 'something' }
       assert.equal('something', parser.parseCssVars('$.s'))
     })
     it('should replace function calls starting with `$.` with its return values', function () {
       var someString = 'someString'
-      parser.stateJcssVars = { f: function () { return someString } }
+      parser.context.$ = { f: function () { return someString } }
       assert.equal(someString, parser.parseCssVars('$.f()'))
     })
     it('should be able to handle arguments passed to functions', function () {
-      parser.stateJcssVars = { add: function (n0, n1) { return n0 + n1 } }
+      parser.context.$ = { add: function (n0, n1) { return n0 + n1 } }
       assert.equal(2, parser.parseCssVars('$.add(1,1)'))
     })
     it('should be able to pick out vars in the middle of css', function () {
-      parser.stateJcssVars = { str: 'block' }
+      parser.context.$ = { str: 'block' }
       assert.equal('div { display: block; }', parser.parseCssVars('div { display: $.str; }'))
     })
   })
