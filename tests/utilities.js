@@ -13,4 +13,14 @@ describe('utilities', function () {
       assert.ok(utilities.caller('0')([function () {return true}]))
     })
   })
+
+  describe('runArray', function () {
+    it('should take an array as an argument', function () {
+      assert.ok(utilities.runArray([]))
+    })
+    it('should run all functions in an array', function () {
+      var tst = 0
+      assert.equal(2, utilities.runArray([function () {tst++}, function () {tst++}]))
+    })
+  })
 })
