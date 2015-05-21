@@ -26,5 +26,9 @@ describe('utilities', function () {
       utilities.runArray([function () {tst++}, function () {tst++}])
       assert.equal(2, tst)
     })
+    it('should return an array', function () {
+      assert.equal('object', typeof utilities.runArray([function () {return true}, function () {return false}]))
+      assert.equal(true, utilities.runArray([function () {return true}, function () {return false}])[0])
+    })
   })
 })
