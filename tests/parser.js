@@ -155,6 +155,8 @@ describe('parser', function () {
       assert.equal('js', parser.split('arr[\'d\'] = {i: y}')[0])
       assert.equal('js', parser.split('arr[\'d\']={i: y}')[0])
     })
+
+    it('should pass all css in strings as javascript')
   })
 
   describe('parseCssVars', function () {
@@ -248,6 +250,7 @@ describe('parser', function () {
       assert.equal('', parser.include(testFile))
       fs.unlink(testFile)
     })
+    it('execute in a seperate context, but merge the $ objects')
   })
 
   describe('makeIncludes', function () {
