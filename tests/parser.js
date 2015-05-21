@@ -35,8 +35,8 @@ describe('parser', function () {
     })
 
     it('should run the onDone hook', function () {
-      parser.context.onDone.push(function () {css('css')})
-      assert.equal('css', parser.parse(''))
+      parser.context.onDone = [function () {css('css')}]
+      assert.equal('\ncss', parser.parse(''))
     })
   })
 
