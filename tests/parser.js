@@ -299,4 +299,41 @@ describe('parser', function () {
       fs.unlink(testFile)
     })
   })
+
+  describe('initialize', function () {
+    it('should write the context as this\'s ownProperty', function () {
+      var testParser = new Parser
+      testParser.initialize()
+      assert.ok(!testParser.hasOwnPropery(context))
+    })
+    it('should overwrite the context with a new one', function () {
+      var testParser = new Parser
+      testParser.context.somevar = ''
+      testParser.initialize()
+      assert.ok(!testParser.context.somevar)
+    })
+  })
+
+  describe('createContext', function () {
+    it('should return a context')
+  })
+
+  describe('cleanContext', function () {
+    it('should clear the returnString', function () {
+      var testParser = new Parser
+      testParser.context.returnString = 'css'
+      testParser.cleanContext()
+      assert.equal('', testParser.context.returnString)
+    })
+  })
+
+  describe('mergeContext', function () {
+    it('should merge the passed context with this.context', function () {
+      var testParser = new Parser
+      var test2Parser = new Parser
+      testParser.context.somevar = true
+      testParser.mergeContext(test2Parser.context)
+      assert.ok(testParser.context.somevar)
+    })
+  })
 })
