@@ -33,6 +33,11 @@ describe('parser', function () {
     it('Should keep variables in global space', function () {
       assert.equal('a{...}\ntrue', parser.parse('var testVar = true \na{...}\ncss(testVar)'))
     })
+
+    it('should run the onDone hook', function () {
+      parser.context.onDone.push(function () {css('css')})
+      assert.equal('css', parser.parse(''))
+    })
   })
 
   describe('interpret', function () {
