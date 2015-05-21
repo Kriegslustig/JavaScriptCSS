@@ -304,7 +304,7 @@ describe('parser', function () {
     it('should write the context as this\'s ownProperty', function () {
       var testParser = new Parser
       testParser.initialize()
-      assert.ok(!testParser.hasOwnPropery(context))
+      assert.ok(!testParser.hasOwnProperty(context))
     })
     it('should overwrite the context with a new one', function () {
       var testParser = new Parser
@@ -312,10 +312,6 @@ describe('parser', function () {
       testParser.initialize()
       assert.ok(!testParser.context.somevar)
     })
-  })
-
-  describe('createContext', function () {
-    it('should return a context')
   })
 
   describe('cleanContext', function () {
