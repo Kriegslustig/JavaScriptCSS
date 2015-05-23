@@ -1,0 +1,29 @@
+// include 'somefile.jcss'
+
+$.colors = {
+  green: 'hsl(120, 40%, 10%)',
+  yellow: 'hsl(40, 40%, 10%)'
+}
+
+.class,
+.someOtherClass {
+  background: $.colors.green;
+}
+
+$.extend.add('roundbutton', '\
+  display: block;\
+  background:' + $.colors.yellow + ';\
+  border-radius: 100%;\
+  border: none;'
+)
+
+$.dialogueWidth = 200
+.dialogue {
+  width: $.$($.dialogueWidth)px
+}
+
+.dialogue__button {
+  left: $.$($.dialogueWidth / 2)px
+}
+
+$.extend.that('roundbutton', '.dialogue__button')

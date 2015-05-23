@@ -1,0 +1,16 @@
+
+.class,
+.someOtherClass {
+  background: hsl(120, 40%, 10%);
+}
+
+.dialogue {
+  width: 200px
+}
+
+.dialogue__button {
+  left: 100px
+}
+
+
+roundbutton, .dialogue__button {  display: block;  background:hsl(40, 40%, 10%);  border-radius: 100%;  border: none;}
