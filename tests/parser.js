@@ -287,7 +287,16 @@ describe('parser', function () {
       assert.equal('', testParser.include(testFile))
       fs.unlink(testFile)
     })
-    it('execute in a seperate context, but merge the $ objects')
+    it('execute in a seperate context, but merge the $ objects', function () {
+      var testParser = new Parser
+      var testFile = './testfile.jsheet'
+      testParser.context.globalVar = true
+      fs.writeFileSync(testFile, '$.testVar = true; globalVar = false')
+      testParser.include(testFile)
+      assert.equal(true, testParser.context.$.testVar)
+      assert.ok(testParser.context.globalVar)
+      fs.unlink(testFile)
+    })
   })
 
   describe('makeIncludes', function () {
