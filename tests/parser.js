@@ -180,7 +180,13 @@ describe('parser', function () {
       assert.equal('js', testParser.split('arr[\'d\']={i: y}')[0])
     })
 
-    it('should pass all css in strings as javascript')
+    it('should pass all css in strings as javascript', function () {
+      var testParser = new Parser
+      assert.equal('js', testParser.split('css(\'\
+        div {\
+          display: block;\
+        }\')')[0])
+    })
   })
 
   describe('parseCssVars', function () {
