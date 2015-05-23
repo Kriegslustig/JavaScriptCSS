@@ -34,7 +34,7 @@ css('div {display: block}')
 ```
 
 ### Variable Scope
-The variable scope is global everywhere
+Every file has it's own local scope. But the `$`-object is global.
 
 ### helpers
 Because underscore is used in the project, I thought i'd pass it to the jsheets. There are also some helpers provided inside the `$` object.

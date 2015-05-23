@@ -11,8 +11,6 @@ jsheets \- A simple CSS preprocessor that interprets JavaScript
 .P
 Jsheets is a CSS preprocessor that executes JavaScript\. It also replaces function calls and variables inside CSS\. A simple approach to CSS preprocessing\.
 .SH SYNTAX
-.P
-There are three things special about jsheets:
 .SS The \fB$\fR Object
 .P
 Inside CSS the whole \fB$\fR object is availible to you\. That's it\.
@@ -42,6 +40,9 @@ With the \fBcss\fR function you can output css\. So you can do:
 css('div {display: block}')
 .fi
 .RE
+.SS Variable Scope
+.P
+Every file has it's own local scope\. But the \fB$\fR\-object is global\.
 .SS helpers
 .P
 Because underscore is used in the project, I thought i'd pass it to the jsheets\. There are also some helpers provided inside the \fB$\fR object\.
