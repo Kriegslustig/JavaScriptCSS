@@ -42,7 +42,7 @@ describe('parser', function () {
 
     it('should run the onDone hook', function () {
       var testParser = new Parser
-      testParser.context.onDone = [function () {css('css')}]
+      testParser.context.onDone = [function () {return 'css'}]
       assert.equal('\ncss', testParser.parse(''))
     })
     describe('onDone', function () {
