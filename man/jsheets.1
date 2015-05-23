@@ -48,15 +48,50 @@ Every file has it's own local scope\. But the \fB$\fR\-object is global\.
 Because underscore is used in the project, I thought i'd pass it to the jsheets\. There are also some helpers provided inside the \fB$\fR object\.
 .SS $
 .P
-\fB$\.$\fR is a function that executes and returns what is passed to it\. So for example:
+\fB$\.$\fR is a function that executes and returns what is passed to it\. This can be usefull for math or sometimes you can use it to use variables in weird places\. Example:
 .P
 .RS 2
 .nf
 div {
   width: $\.$(100 * 30)px
+  /* WON'T WORK */
+  width: $\.someWithem
+  /* WILL WORK */
+  width: $\.$($\.someWith)em
 }
 .fi
 .RE
+.SS extend
+.P
+With \fBextend\fR you can reuse css attributes\. It has two methods: \fBadd\fR and \fBthat\fR\|\. With add you create save a bunch of attributes under a name\.
+.P
+.RS 2
+.nf
+$\.extend\.add('roundbutton', '\\
+  display: block;'
+)
+.fi
+.RE
+.P
+Then with \fBextend\.that\fR you can then reuse those attributes\.
+.P
+.RS 2
+.nf
+$\.extend\.that('roundbutton', '\.dialogue__button')
+$\.extend\.that('roundbutton', '\.escape__button')
+.fi
+.RE
+.P
+What is special about this function, is that it renders only one CSS block per \fBextend\.add\fR\|\. So the above renders to:
+.P
+.RS 2
+.nf
+roundbutton, \.dialogue__button, \.escape__button {  display: block; }
+.fi
+.RE
+.SS onDone
+.P
+On done is an array you can push functions to that get executed at the and of parsing a file\. The return value of a onDone hook will get printed as CSS\.
 .P
 You cannot use braces inside of a call to \fB$\.$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
 .SH ROADMAP
