@@ -19,11 +19,11 @@ div {
 }
 ```
 
-### `import`
-With `import` you can import files to a jsheet. Its usage is straight forward:
+### `include`
+With `include` you can import files to a jsheet. Its usage is straight forward:
 
 ```
-import 'somefile.jsheet'
+include 'somefile.jsheet'
 ```
 
 ### `css()`
