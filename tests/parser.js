@@ -317,7 +317,7 @@ describe('parser', function () {
       var testParser = new Parser
       var testFile = './testfile.jsheet'
       fs.writeFileSync(testFile, 'css(\'div{display: block}\')')
-      assert.equal('div{display: block}', testParser.makeIncludes('include(\'' + testFile + '\')'))
+      assert.equal('div{display: block}', testParser.makeIncludes('include \'' + testFile + '\''))
       fs.unlink(testFile)
     })
   })
