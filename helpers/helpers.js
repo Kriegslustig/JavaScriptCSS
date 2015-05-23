@@ -22,7 +22,7 @@ module.exports = function (context) {
         return function () {
           var returnVal
           if(!self.extendables[extendable]) return ''
-          returnVal = [self.extendables[extendable].selectors].concat(self.extendables[extendable].selectors).join(', ') + ' {' + self.extendables[extendable].css + '}\n'
+          returnVal = [extendable].concat(self.extendables[extendable].selectors).join(', ') + ' {' + self.extendables[extendable].css + '}\n'
           self.extendables[extendable] = false
           return returnVal
         }
