@@ -20,7 +20,11 @@ module.exports = function (context) {
       extendMaker: function (extendable) {
         var self = this
         return function () {
-          return [self.extendables[extendable].selectors].concat(self.extendables[extendable].selectors).join(', ') + ' {' + self.extendables[extendable].css + '}\n'
+          var returnVal
+          if(!self.extendables[extendable]) return ''
+          returnVal = [self.extendables[extendable].selectors].concat(self.extendables[extendable].selectors).join(', ') + ' {' + self.extendables[extendable].css + '}\n'
+          self.extendables[extendable] = false
+          return returnVal
         }
       }
     }
