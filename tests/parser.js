@@ -186,6 +186,7 @@ describe('parser', function () {
         div {\
           display: block;\
         }\')')[0])
+      assert.equal('js', testParser.split('css(\'\n        div {\n          display: block;\n        }\')')[0])
     })
   })
 
