@@ -26,7 +26,7 @@ div {
 ```
 
 ### `include`
-With `include` you can import files to a jsheet. Its usage is straight forward:
+With `include` you can import files or directories to a jsheet. When you include a directory, it will search that directory for files with the `jsheet` file extension. Its usage is straight forward:
 
 ```
 include 'somefile.jsheet'
@@ -103,7 +103,6 @@ ROADMAP
 
 I'm pretty ok with the package as it stands right now. But there are a lot of things I plan to implement.
 
-* Globbing
 * Integration
   * express
   * meteor
