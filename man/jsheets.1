@@ -2,7 +2,7 @@
 .SH "NAME"
 \fBjsheets\fR
 .P
-jsheets \- A simple CSS preprocessor that interprets JavaScript
+A simple CSS preprocessor that interprets JavaScript
 .SH SYNOPSYS
 .P
 \fBjsheets \fIfile\fR\fR
@@ -93,6 +93,24 @@ roundbutton, \.dialogue__button, \.escape__button {  display: block; }
 On done is an array you can push functions to that get executed at the and of parsing a file\. The return value of a onDone hook will get printed as CSS\.
 .P
 You cannot use braces inside of a call to \fB$\.$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
+.SS calc
+.P
+With calc you can do calculations in css units\. You pass it a string\. It also does a printf\-style replacement with \fB%d\fR\|\.
+.P
+.RS 2
+.nf
+$\.someVar = '4rem'
+$\.calc('%d / 2', $\.someVar)
+.fi
+.RE
+.P
+compilesTo
+.P
+.RS 2
+.nf
+2rem
+.fi
+.RE
 .SH ROADMAP
 .P
 I'm pretty ok with the package as it stands right now\. But there are a lot of things I plan to implement\.

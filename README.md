@@ -85,6 +85,19 @@ On done is an array you can push functions to that get executed at the and of pa
 
 You cannot use braces inside of a call to `$.$`. That's because the `$` variables and functions are replaced using a mediocar RegEx.
 
+#### calc
+With calc you can do calculations in css units. You pass it a string. It also does a printf-style replacement with `%d`.
+
+```
+$.someVar = '4rem'
+$.calc('%d / 2', $.someVar)
+```
+
+compilesTo
+```
+2rem
+```
+
 ROADMAP
 -------
 
