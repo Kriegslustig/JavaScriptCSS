@@ -1,14 +1,20 @@
-# jsheets
-## NAME
-jsheets - A simple CSS preprocessor that interprets JavaScript
+jsheets(1)
+======
 
-## SYNOPSYS
+A simple CSS preprocessor that interprets JavaScript
+
+SYNOPSYS
+-------
+
 **jsheets _file_**
 
-## DESCRIPTION
+DESCRIPTION
+----------
+
 Jsheets is a CSS preprocessor that executes JavaScript. It also replaces function calls and variables inside CSS. A simple approach to CSS preprocessing.
 
-## SYNTAX
+SYNTAX
+------
 
 ### The `$` Object
 Inside CSS the whole `$` object is availible to you. That's it.
@@ -79,7 +85,9 @@ On done is an array you can push functions to that get executed at the and of pa
 
 You cannot use braces inside of a call to `$.$`. That's because the `$` variables and functions are replaced using a mediocar RegEx.
 
-## ROADMAP
+ROADMAP
+-------
+
 I'm pretty ok with the package as it stands right now. But there are a lot of things I plan to implement.
 
 * Globbing
