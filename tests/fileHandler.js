@@ -79,7 +79,7 @@ describe('fileHandler', function () {
   })
 
   describe('getJsheets', function () {
-    var testDirectory = './test'
+    var testDirectory = 'test'
     var testFile = testDirectory + '/testfile.jsheet'
     var testFile2 = testDirectory + '/testfile2.jsheet'
     var testFile3 = testDirectory + '/testfile2.css'
