@@ -286,6 +286,12 @@ describe('parser', function () {
   })
 
   describe('include', function () {
+    var testDirectory = 'test7'
+    var testFile = testDirectory + '/testfile.jsheet'
+    before(function () {
+      fs.mkdirSync(testDirectory)
+      fs.writeFileSync(testFile, ' ')
+    })
     it('should read and parse a jsheets file', function () {
       var testParser = new Parser
       var testFile = './testfile.jsheet'
@@ -310,6 +316,14 @@ describe('parser', function () {
       assert.equal(true, testParser.context.$.testVar)
       assert.ok(testParser.context.globalVar)
       fs.unlink(testFile)
+    })
+    it('should be able to take whole directories as an argument', function () {
+      var testParser = new Parser
+      assert.equal('string', typeof testParser.include(testDirectory))
+    })
+    after(function () {
+      fs.unlinkSync(testFile)
+      fs.rmdirSync(testDirectory)
     })
   })
 

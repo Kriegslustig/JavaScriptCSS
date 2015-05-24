@@ -79,7 +79,7 @@ describe('fileHandler', function () {
   })
 
   describe('getJsheets', function () {
-    var testDirectory = 'test'
+    var testDirectory = 'test1'
     var testFile = testDirectory + '/testfile.jsheet'
     var testFile2 = testDirectory + '/testfile2.jsheet'
     var testFile3 = testDirectory + '/testfile2.css'
@@ -110,7 +110,7 @@ describe('fileHandler', function () {
   })
 
   describe('filterLs', function () {
-    var testDir = './test'
+    var testDir = './test42'
     var testFile = testDir + '/_testfile.jsheet'
     var testFile2 = testDir + '/_testfile2.jsheet'
     var testFile3 = testDir + '/testfile2.css'
