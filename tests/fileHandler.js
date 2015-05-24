@@ -108,4 +108,33 @@ describe('fileHandler', function () {
       fs.rmdirSync(testDirectory)
     })
   })
+
+  describe('filterLs', function () {
+    var testDir = './test'
+    var testFile = testDir + '/_testfile.jsheet'
+    var testFile2 = testDir + '/_testfile2.jsheet'
+    var testFile3 = testDir + '/testfile2.css'
+    before(function () {
+      fs.mkdirSync(testDir)
+      fs.writeFileSync(testFile, ' ')
+      fs.writeFileSync(testFile2, ' ')
+      fs.writeFileSync(testFile3, ' ')
+    })
+    it('should take a path and a string as arguments', function () {
+      assert.ok(fileHandler.filterLs(testDir, '.'))
+    })
+    it('should return an array', function () {
+      assert.equal('object', typeof fileHandler.filterLs(testDir, '.'))
+    })
+    it('should return all files in a directory whos filename contains the second argument', function () {
+      var returnVal = fileHandler.filterLs(testDir, '_')
+      assert.equal(2, returnVal.length)
+    })
+    after(function () {
+      fs.unlinkSync(testFile)
+      fs.unlinkSync(testFile2)
+      fs.unlinkSync(testFile3)
+      fs.rmdirSync(testDir)
+    })
+  })
 })
