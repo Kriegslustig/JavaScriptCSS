@@ -77,4 +77,35 @@ describe('fileHandler', function () {
       assert.equal('yolo.42.txt', fileHandler.setFileExt('yolo.42.xml', 'txt'))
     })
   })
+
+  describe('getJsheets', function () {
+    var testDirectory = './test'
+    var testFile = testDirectory + '/testfile.jsheet'
+    var testFile2 = testDirectory + '/testfile2.jsheet'
+    var testFile3 = testDirectory + '/testfile2.css'
+    before(function () {
+      fs.mkdirSync(testDirectory)
+      fs.writeFileSync(testFile, ' ')
+      fs.writeFileSync(testFile2, ' ')
+      fs.writeFileSync(testFile3, ' ')
+    })
+    it('should return an array', function () {
+      assert.equal('object', typeof fileHandler.getJsheets(testFile))
+    })
+    it('should return paths to all jsheets in a directory', function () {
+      var jsheets = fileHandler.getJsheets(testDirectory)
+      assert.ok(jsheets.indexOf(testFile) > -1)
+      assert.ok(jsheets.indexOf(testFile2) > -1)
+    })
+    it('should ignore other files in the directory', function () {
+      var jsheets = fileHandler.getJsheets(testDirectory)
+      assert.ok(jsheets.indexOf(testFile3) === -1)
+    })
+    after(function () {
+      fs.unlinkSync(testFile)
+      fs.unlinkSync(testFile2)
+      fs.unlinkSync(testFile3)
+      fs.rmdirSync(testDirectory)
+    })
+  })
 })
