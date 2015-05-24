@@ -31,4 +31,14 @@ describe('utilities', function () {
       assert.equal(true, utilities.runArray([function () {return true}, function () {return false}])[0])
     })
   })
+
+  describe('stringFormat', function () {
+    it('should return a string', function () {
+      assert.equal('string', typeof utilities.stringFormat('%s', [], '%s'))
+    })
+    it('should take iterate over the second argument and replace the third argument in the first with their values', function () {
+      assert.equal('test', utilities.stringFormat('%s', ['test'], '%s'))
+      assert.equal('testtest', utilities.stringFormat('%s%s', ['test','test'], '%s'))
+    })
+  })
 })
