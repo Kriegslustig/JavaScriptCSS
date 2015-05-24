@@ -19,11 +19,11 @@ $.extend.add('roundbutton', '\
 
 $.dialogueWidth = 200
 .dialogue {
-  width: $.$($.dialogueWidth)px
+  width: $.$($.dialogueWidth)px;
 }
 
 .dialogue__button {
-  left: $.$($.dialogueWidth / 2)px
+  left: $.calc('%d / 2', $.dialogueWidth)px;
 }
 
 $.extend.that('roundbutton', '.dialogue__button')
