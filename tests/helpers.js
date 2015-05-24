@@ -59,4 +59,35 @@ describe('helpers', function () {
       })
     })
   })
+  describe('calc', function () {
+    var helpers = new Helpers({})
+    it('should take a string as an argument', function () {
+      assert.ok(helpers.calc('1 + 1'))
+    })
+    it('should return a string if it\'s passed a number with a unit', function () {
+      assert.equal('string', typeof helpers.calc('1em + 1em'))
+    })
+    it('should return a number if it\'s passed a number without a unit', function () {
+      assert.equal('number', typeof helpers.calc('1 + 1'))
+    })
+    it('should return false if there are mixed units', function () {
+      assert.equal(false, helpers.calc('1px + 1em'))
+    })
+    it('should return a value in the same unit as the parameter', function () {
+      assert.equal('2em', helpers.calc('1 + 1em'))
+      assert.equal('12px', helpers.calc('3px + 9'))
+    })
+    it('should be able to handle calculation of any complexity', function () {
+      assert.equal('24em', helpers.calc('48em / 2'))
+      assert.equal('48em', helpers.calc('24em * 2'))
+      assert.equal('4em', helpers.calc('24em * 2 / 12em'))
+      assert.equal('144em', helpers.calc('24em * (12em / 2)'))
+    })
+    it('should replace %d in the first arg with the rest of the arguments, like printf', function () {
+      var some = 3
+      var all = '5em'
+      assert.equal(4, helpers.calc('1 + %d', some))
+      assert.equal('5.5em', helpers.calc('%d + %d / 2', some, all))
+    })
+  })
 })
