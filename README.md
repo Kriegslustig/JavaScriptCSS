@@ -129,6 +129,27 @@ In jsheets hooks are simple arrays you can push functions to. At a certain point
 
 These hooks are executed without an argument, at the and of parsing a file. The return value of a `onEOF` hook will get printed as CSS.
 
+#### Extensions
+
+Extending jsheets is super straigt forward. If you want to add your own helpers, you can just add stuff to the `object`.
+
+```
+$.myHelper = function () {
+  css('before: "YEY! I wrote my own helper :OO"')
+}
+```
+
+You can also install and require npm modules. Autoprefixer for example
+
+```
+npm install autoprefixer
+```
+
+```
+onEOF.push(require('autoprefixer'))
+```
+
+
 #### onAfterParse
 
 `onAfterParse` hooks are the last thing that gets called. They receive the parsed CSS as an argument. Their return value replaces the parsed CSS. This makes it perfect for something like autoprefixer.
