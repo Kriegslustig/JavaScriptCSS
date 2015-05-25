@@ -18,7 +18,7 @@ module.exports = function (context) {
       that: function (extendable, selector) {
         if(!this.extendables[extendable]) return false
         this.extendables[extendable]['selectors'].push(selector)
-        context.onDone.push(this.extendMaker(extendable))
+        context.onEOF.push(this.extendMaker(extendable))
       },
       extendMaker: function (extendable) {
         var self = this

@@ -12,7 +12,7 @@ describe('helpers', function () {
   })
 
   describe('extend', function () {
-    var context = {onDone: []}
+    var context = {onEOF: []}
     var helpers = new Helpers(context)
     it('should be an object', function () {
       assert.equal('object', typeof helpers.extend)
@@ -38,10 +38,10 @@ describe('helpers', function () {
       it('should only take strings for which there have been extendables added for as an argument', function () {
         assert.ok(helpers.extend.that('!', '') !== undefined)
       })
-      it('should add a function to onDone', function () {
-        onDone = []
+      it('should add a function to onEOF', function () {
+        onEOF = []
         assert.equal(undefined, helpers.extend.that(' ', 'div'))
-        assert.equal('function', typeof context.onDone[0])
+        assert.equal('function', typeof context.onEOF[0])
       })
     })
     describe('extendMaker', function () {
@@ -54,7 +54,7 @@ describe('helpers', function () {
     })
     after(function () {
       it('should add css blocks to the end of a file', function () {
-        assert.equal(' , div {css}\n', context.onDone[0]())
+        assert.equal(' , div {css}\n', context.onEOF[0]())
       })
     })
   })

@@ -87,8 +87,8 @@ What is special about this function, is that it renders only one CSS block per `
 roundbutton, .dialogue__button, .escape__button {  display: block; }
 ```
 
-#### onDone
-On done is an array you can push functions to that get executed at the and of parsing a file. The return value of a onDone hook will get printed as CSS.
+#### onEOF
+On done is an array you can push functions to that get executed at the and of parsing a file. The return value of a onEOF hook will get printed as CSS.
 
 You cannot use braces inside of a call to `$.$`. That's because the `$` variables and functions are replaced using a mediocar RegEx.
 
@@ -110,6 +110,7 @@ ROADMAP
 
 I'm pretty ok with the package as it stands right now. But there are a lot of things I plan to implement.
 
+* Extensions
 * Integration
   * express
   * meteor

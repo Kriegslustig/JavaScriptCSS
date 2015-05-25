@@ -40,15 +40,15 @@ describe('parser', function () {
       assert.equal('a{...}\ntrue', testParser.parse('var testVar = true \na{...}\ncss(testVar)'))
     })
 
-    it('should run the onDone hook', function () {
+    it('should run the onEOF hook', function () {
       var testParser = new Parser
-      testParser.context.onDone = [function () {return 'css'}]
+      testParser.context.onEOF = [function () {return 'css'}]
       assert.equal('\ncss', testParser.parse(''))
     })
-    describe('onDone', function () {
+    describe('onEOF', function () {
       it('should add the returned value of a hook to the parsed css string', function () {
         var testParser = new Parser
-        testParser.context.onDone = [function () {return 'css'}]
+        testParser.context.onEOF = [function () {return 'css'}]
         assert.equal('\ncss', testParser.parse(''))
       })
     })

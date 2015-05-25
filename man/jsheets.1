@@ -95,9 +95,9 @@ What is special about this function, is that it renders only one CSS block per \
 roundbutton, \.dialogue__button, \.escape__button {  display: block; }
 .fi
 .RE
-.SS onDone
+.SS onEOF
 .P
-On done is an array you can push functions to that get executed at the and of parsing a file\. The return value of a onDone hook will get printed as CSS\.
+On done is an array you can push functions to that get executed at the and of parsing a file\. The return value of a onEOF hook will get printed as CSS\.
 .P
 You cannot use braces inside of a call to \fB$\.$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
 .SS calc
