@@ -35,7 +35,7 @@ describe('parser', function () {
       assert.equal('\n div {display:someOtherString}', testString)
     })
 
-    it('Should keep variables in global space', function () {
+    it('should keep variables in global space', function () {
       var testParser = new Parser
       assert.equal('a{...}\ntrue', testParser.parse('var testVar = true \na{...}\ncss(testVar)'))
     })
@@ -340,14 +340,15 @@ describe('parser', function () {
       assert.equal('', testParser.include(testFile))
       fs.unlink(testFile)
     })
-    it('execute in a seperate context, but merge the $ objects', function () {
+    it('execute in the same context, but empty the hooks', function () {
       var testParser = new Parser
       var testFile = './testfile.jsheet'
       testParser.context.globalVar = true
-      fs.writeFileSync(testFile, '$.testVar = true; globalVar = false')
+      fs.writeFileSync(testFile, '$.testVar = true; globalVar = false; onEOF.push(function () {})')
       testParser.include(testFile)
       assert.equal(true, testParser.context.$.testVar)
-      assert.ok(testParser.context.globalVar)
+      assert.ok(!testParser.context.globalVar)
+      assert.equal(0, testParser.context.onEOF.length)
       fs.unlink(testFile)
     })
     it('should be able to take whole directories as an argument', function () {
