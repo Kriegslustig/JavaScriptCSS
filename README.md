@@ -49,6 +49,25 @@ css('div {display: block}')
 ### Variable Scope
 Every file has it's own local scope. But the `$`-object is global.
 
+### Globals
+Inside your JavaScript you have the following variables availible to you.
+
+#### `_`
+
+[The underscore library](0.1.0)
+
+#### `require`
+
+[The nodejs require function](https://nodejs.org/api/globals.html#globals_require)
+
+#### css
+
+As documented above
+
+#### onEOF, onAfterParse
+
+Documented in the `hooks section`
+
 ### helpers
 There are some helpers provided inside the `$` object.
 
