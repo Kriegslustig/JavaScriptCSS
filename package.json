@@ -24,7 +24,8 @@
     "underscore": "latest"
   },
   "scripts": {
-    "test": "mocha tests/",
-    "build-man": "marked-man README.md > man/jsheets.1"
+    "test": "mocha --reporter nyan --watch tests/ 2> /dev/null",
+
+    "prepublish": "marked-man README.md > man/jsheets.1"
   }
 }
