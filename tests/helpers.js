@@ -4,10 +4,10 @@ var vm = require('vm')
 var Helpers = require('../helpers/helpers.js')
 
 describe('helpers', function () {
-  describe('$', function () {
+  describe('()', function () {
     var helpers = new Helpers({})
     it('should be able to parse an expression and return the pased value', function () {
-      assert.equal(true, helpers.$(true))
+      assert.equal(true, helpers(true))
     })
   })
 

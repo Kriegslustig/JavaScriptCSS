@@ -3,11 +3,10 @@ var _ = require('underscore')
 var utilities = require('../lib/utilities.js')
 
 module.exports = function (context) {
-  return {
-    $: function (expression) {
+  var helpers = function (expression) {
       return expression
-    },
-
+  }
+  _.extend(helpers, {
     extend: {
       extendables: {},
       add: function (selector, cssString) {
@@ -42,5 +41,6 @@ module.exports = function (context) {
       calculation = calculation.replace(unitsRegex, '')
       return eval(calculation) + (unit ? unit[0] : 0 )
     }
-  }
+  })
+  return helpers
 }
