@@ -53,13 +53,13 @@ describe('parser', function () {
       })
       assert.equal('!', testParser.parse('css(\'css\')'))
     })
+  })
 
-    describe('onEOF', function () {
-      it('should add the returned value of a hook to the parsed css string', function () {
-        var testParser = new Parser
-        testParser.context.onEOF = [function () {return 'css'}]
-        assert.equal('\ncss', testParser.parse(''))
-      })
+  describe('runOnEOF', function () {
+    it('should add the returned value of a hook to the parsed css string', function () {
+      var testParser = new Parser
+      testParser.context.onEOF = [function () {return 'css'}]
+      assert.equal('\ncss', testParser.runOnEOF())
     })
   })
 
