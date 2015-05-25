@@ -377,6 +377,11 @@ describe('parser', function () {
       testParser.cleanContext()
       assert.equal('', testParser.context.returnString)
     })
+    it('should return the current returnString', function () {
+      var testParser = new Parser
+      testParser.context.returnString = 'css'
+      assert.equal('css', testParser.cleanContext())
+    })
   })
 
   describe('mergeContext', function () {
