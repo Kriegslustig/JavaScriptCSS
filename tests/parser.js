@@ -46,12 +46,37 @@ describe('parser', function () {
       assert.equal('\ncss', testParser.parse(''))
     })
 
+    it('should run the onAfterParse hooks', function () {
+      var testParser = new Parser
+      testParser.context.onAfterParse.push(function (parsedJsheet) {
+        return '!'
+      })
+      assert.equal('!', testParser.parse('css(\'css\')'))
+    })
+
     describe('onEOF', function () {
       it('should add the returned value of a hook to the parsed css string', function () {
         var testParser = new Parser
         testParser.context.onEOF = [function () {return 'css'}]
         assert.equal('\ncss', testParser.parse(''))
       })
+    })
+  })
+
+  describe('runAfterParseHooks', function () {
+    it('should pass the parsed jsheet to the hook', function () {
+      var testParser = new Parser
+      testParser.context.onAfterParse.push(function (parsedJsheet) {
+        assert.equal('css', parsedJsheet)
+      })
+      testParser.runAfterParseHooks('css')
+    })
+    it('should set the return value of a hook as the redered css', function () {
+      var testParser = new Parser
+      testParser.context.onAfterParse.push(function (parsedJsheet) {
+        return '!'
+      })
+      assert.equal('!', testParser.runAfterParseHooks('css'))
     })
   })
 
