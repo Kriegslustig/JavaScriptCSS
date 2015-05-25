@@ -13,6 +13,13 @@ DESCRIPTION
 
 Jsheets is a CSS preprocessor that executes JavaScript. It also replaces function calls and variables inside CSS. A simple approach to CSS preprocessing.
 
+INSTALL
+------
+
+```
+npm install -g jsheets
+```
+
 SYNTAX
 ------
 
