@@ -37,7 +37,6 @@ describe('helpers', function () {
       })
       it('should only take strings for which there have been extendables added for as an argument', function () {
         assert.ok(helpers.extend.that('!', '') !== undefined)
-        console.log(context)
       })
       it('should add a function to onDone', function () {
         onDone = []
