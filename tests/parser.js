@@ -63,20 +63,20 @@ describe('parser', function () {
     })
   })
 
-  describe('runAfterParseHooks', function () {
+  describe('runOnAfterParse', function () {
     it('should pass the parsed jsheet to the hook', function () {
       var testParser = new Parser
       testParser.context.onAfterParse.push(function (parsedJsheet) {
         assert.equal('css', parsedJsheet)
       })
-      testParser.runAfterParseHooks('css')
+      testParser.runOnAfterParse('css')
     })
     it('should set the return value of a hook as the redered css', function () {
       var testParser = new Parser
       testParser.context.onAfterParse.push(function (parsedJsheet) {
         return '!'
       })
-      assert.equal('!', testParser.runAfterParseHooks('css'))
+      assert.equal('!', testParser.runOnAfterParse('css'))
     })
   })
 
