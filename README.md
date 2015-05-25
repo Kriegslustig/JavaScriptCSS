@@ -24,7 +24,7 @@ SYNTAX
 ------
 
 ### The `$` Object
-Inside CSS the whole `$` object is availible to you. That's it.
+Inside CSS the whole `$` object is availible to you. Because `$` is also a function (as explained in the helpers section), you can't write to its `arguments`, `caller`, `length` and `prototype` attributes.
 
 ```
 div {
@@ -50,20 +50,22 @@ css('div {display: block}')
 Every file has it's own local scope. But the `$`-object is global.
 
 ### helpers
-Because underscore is used in the project, I thought i'd pass it to the jsheets. There are also some helpers provided inside the `$` object.
+There are some helpers provided inside the `$` object.
 
 #### $
-`$.$` is a function that executes and returns what is passed to it. This can be usefull for math or sometimes you can use it to use variables in weird places. Example:
+`$` itself is not just an object but also a function that executes and returns what is passed to it. This can be usefull for math or sometimes you can use it to use variables in weird places. Example:
 
 ```
 div {
-  width: $.$(100 * 30)px
+  width: $(100 * 30)px
   /* WON'T WORK */
   width: $.someWithem
   /* WILL WORK */
-  width: $.$($.someWith)em
+  width: $($.someWith)em
 }
 ```
+
+You cannot use braces inside of a call to `$`. That's because the `$` variables and functions are replaced using a mediocar RegEx.
 
 #### extend
 With `extend` you can reuse css attributes. It has two methods: `add` and `that`. With add you create save a bunch of attributes under a name.
@@ -87,11 +89,6 @@ What is special about this function, is that it renders only one CSS block per `
 roundbutton, .dialogue__button, .escape__button {  display: block; }
 ```
 
-#### onEOF
-On done is an array you can push functions to that get executed at the and of parsing a file. The return value of a onEOF hook will get printed as CSS.
-
-You cannot use braces inside of a call to `$.$`. That's because the `$` variables and functions are replaced using a mediocar RegEx.
-
 #### calc
 With calc you can do calculations in css units. You pass it a string. It also does a printf-style replacement with `%d`.
 
@@ -104,6 +101,18 @@ compilesTo
 ```
 2rem
 ```
+
+### Hooks
+
+In jsheets hooks are simple arrays you can push functions to. At a certain point in the parsing process those function will get executed with certain parameters
+
+#### onEOF
+
+These hooks are executed without an argument, at the and of parsing a file. The return value of a `onEOF` hook will get printed as CSS.
+
+#### onAfterParse
+
+`onAfterParse` hooks are the last thing that gets called. They receive the parsed CSS as an argument. Their return value replaces the parsed CSS. This makes it perfect for something like autoprefixer.
 
 ROADMAP
 -------
