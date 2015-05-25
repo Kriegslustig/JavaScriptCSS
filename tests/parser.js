@@ -45,6 +45,7 @@ describe('parser', function () {
       testParser.context.onEOF = [function () {return 'css'}]
       assert.equal('\ncss', testParser.parse(''))
     })
+
     describe('onEOF', function () {
       it('should add the returned value of a hook to the parsed css string', function () {
         var testParser = new Parser
@@ -59,6 +60,7 @@ describe('parser', function () {
       var testParser = new Parser
       assert.equal('asdf', testParser.interpret(['js', '["a", "s", "d", "f"].forEach(function (value) { css(value) })']))
     })
+
     it('should return the passed string if the first position is css', function () {
       var testParser = new Parser
       assert.equal('display: block', testParser.interpret(['css', 'display: block']))
@@ -263,6 +265,12 @@ describe('parser', function () {
     it('should exec JS', function () {
       var testParser = new Parser
       assert.equal('asdf', testParser.exec('["a", "s", "d", "f"].forEach(function (value) { css(value) })'))
+    })
+
+    it('should provide the require methode', function () {
+      var testParser = new Parser
+      assert.equal('function', testParser.exec('css(typeof require)'))
+      assert.equal('function', testParser.exec('css(typeof require(\'underscore\'))'))
     })
   })
 
