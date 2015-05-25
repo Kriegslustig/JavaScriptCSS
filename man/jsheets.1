@@ -2,7 +2,7 @@
 .SH "NAME"
 \fBjsheets\fR
 .P
-\fBv0\.0\.2\fR \- A simple CSS preprocessor that interprets JavaScript
+\fBv0\.1\.0\fR \- A simple CSS preprocessor that interprets JavaScript
 .SH SYNOPSYS
 .P
 \fBjsheets \fIfile\fR\fR
@@ -19,7 +19,7 @@ npm install \-g jsheets
 .SH SYNTAX
 .SS The \fB$\fR Object
 .P
-Inside CSS the whole \fB$\fR object is availible to you\. That's it\.
+Inside CSS the whole \fB$\fR object is availible to you\. Because \fB$\fR is also a function (as explained in the helpers section), you can't write to its \fBarguments\fR, \fBcaller\fR, \fBlength\fR and \fBprototype\fR attributes\.
 .P
 .RS 2
 .nf
@@ -51,22 +51,24 @@ css('div {display: block}')
 Every file has it's own local scope\. But the \fB$\fR\-object is global\.
 .SS helpers
 .P
-Because underscore is used in the project, I thought i'd pass it to the jsheets\. There are also some helpers provided inside the \fB$\fR object\.
+There are some helpers provided inside the \fB$\fR object\.
 .SS $
 .P
-\fB$\.$\fR is a function that executes and returns what is passed to it\. This can be usefull for math or sometimes you can use it to use variables in weird places\. Example:
+\fB$\fR itself is not just an object but also a function that executes and returns what is passed to it\. This can be usefull for math or sometimes you can use it to use variables in weird places\. Example:
 .P
 .RS 2
 .nf
 div {
-  width: $\.$(100 * 30)px
+  width: $(100 * 30)px
   /* WON'T WORK */
   width: $\.someWithem
   /* WILL WORK */
-  width: $\.$($\.someWith)em
+  width: $($\.someWith)em
 }
 .fi
 .RE
+.P
+You cannot use braces inside of a call to \fB$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
 .SS extend
 .P
 With \fBextend\fR you can reuse css attributes\. It has two methods: \fBadd\fR and \fBthat\fR\|\. With add you create save a bunch of attributes under a name\.
@@ -95,11 +97,6 @@ What is special about this function, is that it renders only one CSS block per \
 roundbutton, \.dialogue__button, \.escape__button {  display: block; }
 .fi
 .RE
-.SS onEOF
-.P
-On done is an array you can push functions to that get executed at the and of parsing a file\. The return value of a onEOF hook will get printed as CSS\.
-.P
-You cannot use braces inside of a call to \fB$\.$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
 .SS calc
 .P
 With calc you can do calculations in css units\. You pass it a string\. It also does a printf\-style replacement with \fB%d\fR\|\.
@@ -118,10 +115,21 @@ compilesTo
 2rem
 .fi
 .RE
+.SS Hooks
+.P
+In jsheets hooks are simple arrays you can push functions to\. At a certain point in the parsing process those function will get executed with certain parameters
+.SS onEOF
+.P
+These hooks are executed without an argument, at the and of parsing a file\. The return value of a \fBonEOF\fR hook will get printed as CSS\.
+.SS onAfterParse
+.P
+\fBonAfterParse\fR hooks are the last thing that gets called\. They receive the parsed CSS as an argument\. Their return value replaces the parsed CSS\. This makes it perfect for something like autoprefixer\.
 .SH ROADMAP
 .P
 I'm pretty ok with the package as it stands right now\. But there are a lot of things I plan to implement\.
 .RS 0
+.IP \(bu 2
+Extensions
 .IP \(bu 2
 Integration
 .RS 0
