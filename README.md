@@ -1,7 +1,7 @@
 jsheets(1)
 ======
 
-`v0.1.0` - A simple CSS preprocessor that interprets JavaScript
+`v0.3.0` - A simple CSS preprocessor that interprets JavaScript
 
 SYNOPSYS
 -------
