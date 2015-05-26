@@ -189,3 +189,13 @@ TODO
 ----
 
 * Fix the onAfterParse hook to only execute once
+
+Changelog - `v0.3.0`
+-------
+
+**This is still an early alpha, so everything can change**
+
+* Added this file (changelog)
+* Rewrote the hooks interface
+* All files have the same global scope now
+* Fixed my version numbers (again) #fubar
