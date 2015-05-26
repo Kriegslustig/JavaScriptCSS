@@ -108,11 +108,26 @@ describe('parser', function () {
       testParser.context.on('onEOF', function () {})
       assert.ok(testParser.getHooks('onEOF').length)
     })
+    it('should cleanout the hooks array', function () {
+      var testParser = new Parser
+      testParser.context.on('onEOF', function () {})
+      testParser.getHooks('onEOF')
+      assert.equal(0, testParser.context.hooks.onEOF.length)
+    })
   })
 
   describe('setHooks', function () {
-    it('should take an object containing all hooks as an argument')
-    it('should overwrite all hook arrays with the passed value')
+    it('should take an object containing all hooks as an argument', function () {
+      var testParser = new Parser
+      assert.ok(testParser.setHooks({onEOF: []}))
+    })
+    it('should overwrite all hook arrays with the passed value', function () {
+      var testParser = new Parser
+      testParser.context.on('onEOF', function () {})
+      testParser.context.on('onEOF', function () {})
+      testParser.setHooks({onEOF: [function () {return}]})
+      assert.equal(1, testParser.context.hooks.onEOF.length)
+    })
   })
 
   describe('interpret', function () {
