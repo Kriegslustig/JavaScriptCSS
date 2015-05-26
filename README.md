@@ -33,15 +33,15 @@ div {
 }
 ```
 
-### `include`
+### include
 
-`include '_file/directory_'`
+`include '`_file/directory_`'`
 
 With `include` you can import files or directories to a jsheet. When you include a directory, it will search that directory for files with the `jsheet` file extension.
 
-### `css()`
+### css()
 
-`css(_string_)`
+`css(`_string_`)`
 
 With the `css` function you can output css. So you can do:
 
@@ -55,11 +55,11 @@ All combined files have the same global scope.
 ### Globals
 Inside your JavaScript you have the following variables availible to you.
 
-#### `_`
+#### _
 
 [The underscore library](0.1.0)
 
-#### `require`
+#### require
 
 [The nodejs require function](https://nodejs.org/api/globals.html#globals_require)
 
@@ -73,7 +73,7 @@ Documented in the `hooks section`
 
 #### on
 
-`on(_hook_, _function_)`
+`on(`_hook_`, `_function_`)`
 
 `on` is the function to add functions to hooks. See under the hooks section for examples.
 
@@ -82,7 +82,7 @@ There are some helpers provided inside the `$` object.
 
 #### $
 
-`$(_expression_)`
+`$(`_expression_`)`
 
 `$` itself is not just an object but also a function that executes and returns what is passed to it. This can be usefull for math or sometimes you can use it to use variables in weird places. Example:
 
@@ -100,9 +100,9 @@ You cannot use braces inside of a call to `$`. That's because the `$` variables 
 
 #### extend
 
-`extend.add(_name_, _attributes_)`
+`extend.add(`_name_`, `_attributes_`)`
 
-`extend.that(_name_, _selector_)`
+`extend.that(`_name_`, `_selector_`)`
 
 With `extend` you can reuse css attributes. It has two methods: `add` and `that`. With add you create save a bunch of attributes under a name.
 
@@ -127,7 +127,7 @@ roundbutton, .dialogue__button, .escape__button {  display: block; }
 
 #### calc
 
-`$.calc(_calculation_)`
+`$.calc(`_calculation_`)`
 
 With calc you can do calculations in css units. You pass it a string. It also does a printf-style replacement with `%d`.
 
@@ -184,3 +184,8 @@ I'm pretty ok with the package as it stands right now. But there are a lot of th
   * meteor
 * Highlighting
   * SublimeText
+
+TODO
+----
+
+* Fix the onAfterParse hook to only execute once
