@@ -80,6 +80,33 @@ describe('parser', function () {
     })
   })
 
+  describe('context.on', function () {
+    it('should take a string as a first argument and a function as a second', function () {
+      var testParser = new Parser
+      assert.ok(testParser.context.on('onEOF', function () {}) !== false)
+    })
+    it('should push the function (2nd arg) to the array described by the 1st arg', function () {
+      var testParser = new Parser
+      assert.ok(testParser.context.hooks.onEOF.length === 0)
+      testParser.context.on('onEOF', function () {})
+      assert.ok(testParser.context.hooks.onEOF.length > -1)
+    })
+    it('should return the position within the array', function () {
+      var testParser = new Parser
+      assert.equal(0, testParser.context.on('onEOF', function () {}))
+    })
+  })
+
+  describe('getHooks', function () {
+    it('should take a hook name as its first argument')
+    it('should return an object containing all hooks')
+  })
+
+  describe('setHooks', function () {
+    it('should take an object containing all hooks as an argument')
+    it('should overwrite all hook arrays with the passed value')
+  })
+
   describe('interpret', function () {
     it('should exec js if the first position is js', function () {
       var testParser = new Parser
