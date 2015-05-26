@@ -159,7 +159,7 @@ ROADMAP
 
 I'm pretty ok with the package as it stands right now. But there are a lot of things I plan to implement.
 
-* Extensions
+* clean up the hooks API (make an `on` function)
 * Integration
   * express
   * meteor
