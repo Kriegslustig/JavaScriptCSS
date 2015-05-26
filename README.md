@@ -50,7 +50,7 @@ css('div {display: block}')
 ```
 
 ### Variable Scope
-Every file has it's own local scope. But the `$`-object is global.
+All combined files have the same global scope.
 
 ### Globals
 Inside your JavaScript you have the following variables availible to you.
