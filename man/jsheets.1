@@ -2,7 +2,7 @@
 .SH "NAME"
 \fBjsheets\fR
 .P
-\fBv0\.1\.0\fR \- A simple CSS preprocessor that interprets JavaScript
+\fBv0\.3\.0\fR \- A simple CSS preprocessor that interprets JavaScript
 .SH SYNOPSYS
 .P
 \fBjsheets \fIfile\fR\fR
@@ -28,16 +28,14 @@ div {
 }
 .fi
 .RE
-.SS \fBinclude\fR
+.SS include
 .P
-With \fBinclude\fR you can import files or directories to a jsheet\. When you include a directory, it will search that directory for files with the \fBjsheet\fR file extension\. Its usage is straight forward:
+\fBinclude '\fR\fIfile/directory\fR\fB\|'\fR
 .P
-.RS 2
-.nf
-include 'somefile\.jsheet'
-.fi
-.RE
-.SS \fBcss()\fR
+With \fBinclude\fR you can import files or directories to a jsheet\. When you include a directory, it will search that directory for files with the \fBjsheet\fR file extension\.
+.SS css()
+.P
+\fBcss(\fR\fIstring\fR\fB)\fR
 .P
 With the \fBcss\fR function you can output css\. So you can do:
 .P
@@ -48,11 +46,33 @@ css('div {display: block}')
 .RE
 .SS Variable Scope
 .P
-Every file has it's own local scope\. But the \fB$\fR\-object is global\.
+All combined files have the same global scope\.
+.SS Globals
+.P
+Inside your JavaScript you have the following variables availible to you\.
+.SS _
+.P
+The underscore library \fI0\.1\.0\fR
+.SS require
+.P
+The nodejs require function \fIhttps://nodejs\.org/api/globals\.html#globals_require\fR
+.SS css
+.P
+As documented above
+.SS hooks
+.P
+Documented in the \fBhooks section\fR
+.SS on
+.P
+\fBon(\fR\fIhook\fR\fB,\fR\fIfunction\fR\fB)\fR
+.P
+\fBon\fR is the function to add functions to hooks\. See under the hooks section for examples\.
 .SS helpers
 .P
 There are some helpers provided inside the \fB$\fR object\.
 .SS $
+.P
+\fB$(\fR\fIexpression\fR\fB)\fR
 .P
 \fB$\fR itself is not just an object but also a function that executes and returns what is passed to it\. This can be usefull for math or sometimes you can use it to use variables in weird places\. Example:
 .P
@@ -70,6 +90,10 @@ div {
 .P
 You cannot use braces inside of a call to \fB$\fR\|\. That's because the \fB$\fR variables and functions are replaced using a mediocar RegEx\.
 .SS extend
+.P
+\fBextend\.add(\fR\fIname\fR\fB,\fR\fIattributes\fR\fB)\fR
+.P
+\fBextend\.that(\fR\fIname\fR\fB,\fR\fIselector\fR\fB)\fR
 .P
 With \fBextend\fR you can reuse css attributes\. It has two methods: \fBadd\fR and \fBthat\fR\|\. With add you create save a bunch of attributes under a name\.
 .P
@@ -99,6 +123,8 @@ roundbutton, \.dialogue__button, \.escape__button {  display: block; }
 .RE
 .SS calc
 .P
+\fB$\.calc(\fR\fIcalculation\fR\fB)\fR
+.P
 With calc you can do calculations in css units\. You pass it a string\. It also does a printf\-style replacement with \fB%d\fR\|\.
 .P
 .RS 2
@@ -117,10 +143,35 @@ compilesTo
 .RE
 .SS Hooks
 .P
-In jsheets hooks are simple arrays you can push functions to\. At a certain point in the parsing process those function will get executed with certain parameters
+In \fIjsheets\fR hooks are simple arrays you can push functions to\. They are stored in the hooks object, which is globally availible\. Hooks get triggered at a certain point in the parsing process and then the functions stored in a hook array will get executed with certain parameters\.
 .SS onEOF
 .P
 These hooks are executed without an argument, at the and of parsing a file\. The return value of a \fBonEOF\fR hook will get printed as CSS\.
+.SS Extensions
+.P
+Extending \fIjsheets\fR is super straigt forward\. If you want to add your own helpers, you can just add stuff to the \fBobject\fR\|\.
+.P
+.RS 2
+.nf
+$\.myHelper = function () {
+  css('before: "YEY! I wrote my own helper :OO"')
+}
+.fi
+.RE
+.P
+You can also install and require npm modules\. Autoprefixer for example
+.P
+.RS 2
+.nf
+npm install autoprefixer
+.fi
+.RE
+.P
+.RS 2
+.nf
+on('onEOF', require('autoprefixer'))
+.fi
+.RE
 .SS onAfterParse
 .P
 \fBonAfterParse\fR hooks are the last thing that gets called\. They receive the parsed CSS as an argument\. Their return value replaces the parsed CSS\. This makes it perfect for something like autoprefixer\.
@@ -128,8 +179,6 @@ These hooks are executed without an argument, at the and of parsing a file\. The
 .P
 I'm pretty ok with the package as it stands right now\. But there are a lot of things I plan to implement\.
 .RS 0
-.IP \(bu 2
-Extensions
 .IP \(bu 2
 Integration
 .RS 0
@@ -146,6 +195,26 @@ Highlighting
 SublimeText
 
 .RE
+
+.RE
+.SH TODO
+.RS 0
+.IP \(bu 2
+Fix the onAfterParse hook to only execute once
+
+.RE
+.SH Changelog \- \fBv0\.3\.0\fR
+.P
+\fBThis is still an early alpha, so everything can change\fR
+.RS 0
+.IP \(bu 2
+Added this file (changelog)
+.IP \(bu 2
+Rewrote the hooks interface
+.IP \(bu 2
+All files have the same global scope now
+.IP \(bu 2
+Fixed my version numbers (again) #fubar
 
 .RE
 
