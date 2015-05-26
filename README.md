@@ -24,6 +24,7 @@ SYNTAX
 ------
 
 ### The `$` Object
+
 Inside CSS the whole `$` object is availible to you. Because `$` is also a function (as explained in the helpers section), you can't write to its `arguments`, `caller`, `length` and `prototype` attributes.
 
 ```
@@ -33,13 +34,15 @@ div {
 ```
 
 ### `include`
-With `include` you can import files or directories to a jsheet. When you include a directory, it will search that directory for files with the `jsheet` file extension. Its usage is straight forward:
 
-```
-include 'somefile.jsheet'
-```
+`include '_file/directory_'`
+
+With `include` you can import files or directories to a jsheet. When you include a directory, it will search that directory for files with the `jsheet` file extension.
 
 ### `css()`
+
+`css(_string_)`
+
 With the `css` function you can output css. So you can do:
 
 ```
@@ -64,14 +67,23 @@ Inside your JavaScript you have the following variables availible to you.
 
 As documented above
 
-#### onEOF, onAfterParse
+#### hooks
 
 Documented in the `hooks section`
+
+#### on
+
+`on(_hook_, _function_)`
+
+`on` is the function to add functions to hooks. See under the hooks section for examples.
 
 ### helpers
 There are some helpers provided inside the `$` object.
 
 #### $
+
+`$(_expression_)`
+
 `$` itself is not just an object but also a function that executes and returns what is passed to it. This can be usefull for math or sometimes you can use it to use variables in weird places. Example:
 
 ```
@@ -87,6 +99,11 @@ div {
 You cannot use braces inside of a call to `$`. That's because the `$` variables and functions are replaced using a mediocar RegEx.
 
 #### extend
+
+`extend.add(_name_, _attributes_)`
+
+`extend.that(_name_, _selector_)`
+
 With `extend` you can reuse css attributes. It has two methods: `add` and `that`. With add you create save a bunch of attributes under a name.
 
 ```
@@ -109,6 +126,9 @@ roundbutton, .dialogue__button, .escape__button {  display: block; }
 ```
 
 #### calc
+
+`$.calc(_calculation_)`
+
 With calc you can do calculations in css units. You pass it a string. It also does a printf-style replacement with `%d`.
 
 ```
@@ -123,7 +143,7 @@ compilesTo
 
 ### Hooks
 
-In jsheets hooks are simple arrays you can push functions to. At a certain point in the parsing process those function will get executed with certain parameters
+In _jsheets_ hooks are simple arrays you can push functions to. They are stored in the hooks object, which is globally availible. Hooks get triggered at a certain point in the parsing process and then the functions stored in a hook array will get executed with certain parameters.
 
 #### onEOF
 
@@ -131,7 +151,7 @@ These hooks are executed without an argument, at the and of parsing a file. The 
 
 #### Extensions
 
-Extending jsheets is super straigt forward. If you want to add your own helpers, you can just add stuff to the `object`.
+Extending _jsheets_ is super straigt forward. If you want to add your own helpers, you can just add stuff to the `object`.
 
 ```
 $.myHelper = function () {
@@ -146,7 +166,7 @@ npm install autoprefixer
 ```
 
 ```
-onEOF.push(require('autoprefixer'))
+on('onEOF', require('autoprefixer'))
 ```
 
 
