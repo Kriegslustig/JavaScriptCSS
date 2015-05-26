@@ -98,8 +98,16 @@ describe('parser', function () {
   })
 
   describe('getHooks', function () {
-    it('should take a hook name as its first argument')
-    it('should return an object containing all hooks')
+    it('should take a hook name as its first argument', function () {
+      var testParser = new Parser
+      testParser.context.on('onEOF', function () {})
+      assert.ok(testParser.getHooks('onEOF'))
+    })
+    it('should return an array containing all hooks', function () {
+      var testParser = new Parser
+      testParser.context.on('onEOF', function () {})
+      assert.ok(testParser.getHooks('onEOF').length)
+    })
   })
 
   describe('setHooks', function () {
