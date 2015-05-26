@@ -42,13 +42,13 @@ describe('parser', function () {
 
     it('should run the onEOF hook', function () {
       var testParser = new Parser
-      testParser.context.onEOF = [function () {return 'css'}]
+      testParser.context.hooks.EOF = [function () {return 'css'}]
       assert.equal('\ncss', testParser.parse(''))
     })
 
     it('should run the onAfterParse hooks', function () {
       var testParser = new Parser
-      testParser.context.onAfterParse.push(function (parsedJsheet) {
+      testParser.context.hooks.afterParse.push(function (parsedJsheet) {
         return '!'
       })
       assert.equal('!', testParser.parse('css(\'css\')'))
@@ -58,7 +58,7 @@ describe('parser', function () {
   describe('runOnEOF', function () {
     it('should add the returned value of a hook to the parsed css string', function () {
       var testParser = new Parser
-      testParser.context.onEOF = [function () {return 'css'}]
+      testParser.context.hooks.EOF = [function () {return 'css'}]
       assert.equal('\ncss', testParser.runOnEOF())
     })
   })
@@ -66,14 +66,14 @@ describe('parser', function () {
   describe('runOnAfterParse', function () {
     it('should pass the parsed jsheet to the hook', function () {
       var testParser = new Parser
-      testParser.context.onAfterParse.push(function (parsedJsheet) {
+      testParser.context.hooks.afterParse.push(function (parsedJsheet) {
         assert.equal('css', parsedJsheet)
       })
       testParser.runOnAfterParse('css')
     })
     it('should set the return value of a hook as the redered css', function () {
       var testParser = new Parser
-      testParser.context.onAfterParse.push(function (parsedJsheet) {
+      testParser.context.hooks.afterParse.push(function (parsedJsheet) {
         return '!'
       })
       assert.equal('!', testParser.runOnAfterParse('css'))
@@ -83,50 +83,50 @@ describe('parser', function () {
   describe('context.on', function () {
     it('should take a string as a first argument and a function as a second', function () {
       var testParser = new Parser
-      assert.ok(testParser.context.on('onEOF', function () {}) !== false)
+      assert.ok(testParser.context.on('EOF', function () {}) !== false)
     })
     it('should push the function (2nd arg) to the array described by the 1st arg', function () {
       var testParser = new Parser
-      assert.ok(testParser.context.hooks.onEOF.length === 0)
-      testParser.context.on('onEOF', function () {})
-      assert.ok(testParser.context.hooks.onEOF.length > -1)
+      assert.ok(testParser.context.hooks.EOF.length === 0)
+      testParser.context.on('EOF', function () {})
+      assert.ok(testParser.context.hooks.EOF.length > -1)
     })
     it('should return the position within the array', function () {
       var testParser = new Parser
-      assert.equal(0, testParser.context.on('onEOF', function () {}))
+      assert.equal(0, testParser.context.on('EOF', function () {}))
     })
   })
 
   describe('getHooks', function () {
     it('should take a hook name as its first argument', function () {
       var testParser = new Parser
-      testParser.context.on('onEOF', function () {})
-      assert.ok(testParser.getHooks('onEOF'))
+      testParser.context.on('EOF', function () {})
+      assert.ok(testParser.getHooks('EOF'))
     })
     it('should return an array containing all hooks', function () {
       var testParser = new Parser
-      testParser.context.on('onEOF', function () {})
-      assert.ok(testParser.getHooks('onEOF').length)
+      testParser.context.on('EOF', function () {})
+      assert.ok(testParser.getHooks('EOF').length)
     })
     it('should cleanout the hooks array', function () {
       var testParser = new Parser
-      testParser.context.on('onEOF', function () {})
-      testParser.getHooks('onEOF')
-      assert.equal(0, testParser.context.hooks.onEOF.length)
+      testParser.context.on('EOF', function () {})
+      testParser.getHooks('EOF')
+      assert.equal(0, testParser.context.hooks.EOF.length)
     })
   })
 
   describe('setHooks', function () {
     it('should take an object containing all hooks as an argument', function () {
       var testParser = new Parser
-      assert.ok(testParser.setHooks({onEOF: []}))
+      assert.ok(testParser.setHooks({EOF: []}))
     })
     it('should overwrite all hook arrays with the passed value', function () {
       var testParser = new Parser
-      testParser.context.on('onEOF', function () {})
-      testParser.context.on('onEOF', function () {})
-      testParser.setHooks({onEOF: [function () {return}]})
-      assert.equal(1, testParser.context.hooks.onEOF.length)
+      testParser.context.on('EOF', function () {})
+      testParser.context.on('EOF', function () {})
+      testParser.setHooks({EOF: [function () {return}]})
+      assert.equal(1, testParser.context.hooks.EOF.length)
     })
   })
 
@@ -398,7 +398,7 @@ describe('parser', function () {
       testParser.include(testFile)
       assert.equal(true, testParser.context.$.testVar)
       assert.ok(!testParser.context.globalVar)
-      assert.equal(0, testParser.context.onEOF.length)
+      assert.equal(0, testParser.context.hooks.EOF.length)
       fs.unlink(testFile)
     })
     it('should be able to take whole directories as an argument', function () {
